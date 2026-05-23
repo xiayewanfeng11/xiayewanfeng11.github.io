@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>陈治潼 · 短视频运营简历</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Microsoft YaHei', 'PingFang SC', system-ui, sans-serif;
+    background:#f5f0eb; color:#2c2416;
+    overflow-x:hidden;
+  }
+
+  /* ===== 顶部横幅 ===== */
+  .hero {
+    position:relative;
+    min-height:100vh;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center;
+    background:linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #2d1b1b 100%);
+    color:#f0ece3;
+    padding:2rem;
+    overflow:hidden;
+  }
+  .hero::before {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(circle at 30% 40%, rgba(192,57,43,.15) 0%, transparent 60%),
+               radial-gradient(circle at 70% 60%, rgba(184,134,11,.08) 0%, transparent 50%);
+    pointer-events:none;
+  }
+  .hero .particles {
+    position:absolute; inset:0; overflow:hidden; pointer-events:none;
+  }
+  .hero .particle {
+    position:absolute; border-radius:50%;
+    background:rgba(192,57,43,.08); width:6px; height:6px;
+    animation: floatRnd 12s infinite ease-in-out;
+  }
+  @keyframes floatRnd {
+    0%,100% { transform:translateY(0) scale(1); opacity:0; }
+    20% { opacity:1; }
+    80% { opacity:1; }
+    100% { transform:translateY(-100px) scale(0.5); opacity:0; }
+  }
+
+  .hero h1 {
+    font-size:clamp(2.5rem, 6vw, 4.5rem);
+    font-weight:900; letter-spacing:2px;
+    position:relative; z-index:1;
+    animation: heroIn 1s ease forwards;
+  }
+  .hero .tagline {
+    font-size:clamp(1rem, 2vw, 1.5rem);
+    opacity:0; color:#e0d8cc;
+    margin-top:0.8rem; letter-spacing:3px;
+    animation: heroIn 1s ease .3s forwards;
+    position:relative; z-index:1;
+  }
+  .hero .location {
+    font-size:clamp(0.8rem, 1.2vw, 1rem);
+    opacity:0; color:rgba(240,236,227,.5);
+    margin-top:0.5rem;
+    animation: heroIn 1s ease .5s forwards;
+    position:relative; z-index:1;
+  }
+  .hero .divider {
+    width:0; height:2px; background:#c0392b; border-radius:2px;
+    margin:1.2rem auto;
+    animation: lineGrow .8s ease .6s forwards;
+    position:relative; z-index:1;
+  }
+  @keyframes heroIn {
+    from { opacity:0; transform:translateY(20px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  @keyframes lineGrow {
+    from { width:0; }
+    to   { width:80px; }
+  }
+
+  .scroll-hint {
+    position:absolute; bottom:2rem; left:50%; transform:translateX(-50%);
+    color:rgba(240,236,227,.3);
+    font-size:0.75rem; letter-spacing:2px;
+    animation: bounceHint 2s infinite; z-index:1;
+  }
+  @keyframes bounceHint {
+    0%,100% { transform:translateX(-50%) translateY(0); opacity:.3; }
+    50% { transform:translateX(-50%) translateY(6px); opacity:.7; }
+  }
+
+  /* ===== 内容容器 ===== */
+  .container { max-width:960px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+
+  /* ===== 区块 ===== */
+  .section { margin-bottom:3rem; }
+  .section-title {
+    font-size:clamp(1.2rem, 2.5vw, 1.8rem);
+    font-weight:800; color:#2c2416;
+    display:flex; align-items:center; gap:0.6rem;
+    margin-bottom:1.5rem;
+    padding-bottom:0.6rem;
+    border-bottom:2px solid rgba(192,57,43,.15);
+  }
+  .section-title .num { color:#c0392b; font-size:0.8em; opacity:0.6; }
+
+  /* ===== 关于我 ===== */
+  .about-grid {
+    display:grid; grid-template-columns:1fr 1fr; gap:1rem;
+  }
+  @media(max-width:640px){ .about-grid{grid-template-columns:1fr} }
+  .about-item {
+    background:rgba(255,255,255,.5);
+    border-radius:12px; padding:1.2rem 1.5rem;
+    border:1px solid rgba(0,0,0,.04);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .about-item:hover { transform:translateY(-2px); box-shadow:0 4px 20px rgba(0,0,0,.06); }
+  .about-item .icon { font-size:1.5rem; margin-bottom:0.3rem; }
+  .about-item .label { font-size:0.8rem; opacity:0.5; margin-bottom:0.2rem; }
+  .about-item .value { font-size:clamp(0.9rem,1.4vw,1.1rem); font-weight:600; }
+
+  /* ===== 工作经历 ===== */
+  .exp-card {
+    background:rgba(255,255,255,.5);
+    border-radius:14px; padding:1.5rem 2rem;
+    border:1px solid rgba(0,0,0,.04);
+    margin-bottom:1rem;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .exp-card:hover { transform:translateY(-2px); box-shadow:0 4px 20px rgba(0,0,0,.06); }
+  .exp-card .exp-header {
+    display:flex; justify-content:space-between; align-items:flex-start;
+    flex-wrap:wrap; gap:0.5rem;
+    margin-bottom:0.6rem;
+  }
+  .exp-card .exp-title { font-size:clamp(1rem,1.8vw,1.3rem); font-weight:700; color:#2c2416; }
+  .exp-card .exp-date { font-size:0.8rem; color:#c0392b; font-weight:600; white-space:nowrap; }
+  .exp-card .exp-sub { font-size:0.85rem; opacity:0.6; margin-bottom:0.5rem; }
+  .exp-card ul { list-style:none; }
+  .exp-card ul li {
+    position:relative; padding:0.25rem 0 0.25rem 1.4rem;
+    font-size:clamp(0.85rem,1.3vw,0.95rem);
+    line-height:1.7; color:#555;
+  }
+  .exp-card ul li::before { content:"▸"; position:absolute; left:0; color:#c0392b; font-weight:700; }
+
+  /* ===== 技能标签 ===== */
+  .skills { display:flex; flex-wrap:wrap; gap:0.6rem; }
+  .skill-tag {
+    padding:0.4rem 1rem; border-radius:20px;
+    font-size:0.85rem; font-weight:600;
+    background:rgba(192,57,43,.08); color:#c0392b;
+    border:1px solid rgba(192,57,43,.1);
+    transition: all .2s;
+  }
+  .skill-tag:hover { background:rgba(192,57,43,.15); transform:translateY(-1px); }
+  .skill-tag.secondary { background:rgba(184,134,11,.08); color:#b8860b; border-color:rgba(184,134,11,.1); }
+  .skill-tag.secondary:hover { background:rgba(184,134,11,.15); }
+
+  /* ===== 作品/项目 ===== */
+  .project-grid {
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));
+    gap:1rem;
+  }
+  .project-card {
+    background:rgba(255,255,255,.5);
+    border-radius:14px; padding:1.5rem;
+    border:1px solid rgba(0,0,0,.04);
+    transition: all .3s;
+  }
+  .project-card:hover {
+    transform:translateY(-4px);
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+  }
+  .project-card .p-icon { font-size:2rem; margin-bottom:0.5rem; }
+  .project-card .p-title { font-weight:700; font-size:1.05rem; margin-bottom:0.3rem; }
+  .project-card .p-desc { font-size:0.85rem; color:#666; line-height:1.6; }
+
+  /* ===== 联系方式 ===== */
+  .contact-bar {
+    display:flex; justify-content:center; gap:1.5rem; flex-wrap:wrap;
+    padding:1.5rem 0; border-top:1px solid rgba(0,0,0,.06);
+    margin-top:2rem;
+  }
+  .contact-item {
+    display:flex; align-items:center; gap:0.5rem;
+    font-size:0.9rem; color:#666;
+    transition: color .2s;
+  }
+  .contact-item:hover { color:#c0392b; }
+  .contact-item .ci { font-size:1.1rem; }
+
+  /* ===== 封底感受 ===== */
+  .footer-quote {
+    text-align:center; padding:2rem 1rem;
+    color:#999; font-size:0.85rem; line-height:1.8;
+  }
+
+  /* ===== 滚动入场 ===== */
+  .reveal {
+    opacity:0; transform:translateY(20px);
+    transition: all .6s ease;
+  }
+  .reveal.show { opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ============ 顶部横幅 ============ -->
+<section class="hero">
+  <div class="particles" id="particles"></div>
+  <h1>陈治潼</h1>
+  <div class="divider"></div>
+  <p class="tagline">短视频运营 · 编导 · 内容策划</p>
+  <p class="location">📍 昆明 · 呈贡</p>
+  <div class="scroll-hint">↓ 往下翻</div>
+</section>
+
+<!-- ============ 主内容 ============ -->
+<div class="container">
+
+  <!-- 关于我 -->
+  <div class="section reveal">
+    <h2 class="section-title"><span class="num">01</span> 关于我</h2>
+    <div class="about-grid">
+      <div class="about-item">
+        <div class="icon">🎬</div>
+        <div class="label">岗位</div>
+        <div class="value">短视频运营 / 编导</div>
+      </div>
+      <div class="about-item">
+        <div class="icon">📍</div>
+        <div class="label">现居</div>
+        <div class="value">昆明 · 呈贡</div>
+      </div>
+      <div class="about-item">
+        <div class="icon">⏳</div>
+        <div class="label">经验</div>
+        <div class="value">3年+ 内容创作经验</div>
+      </div>
+      <div class="about-item">
+        <div class="icon">🎯</div>
+        <div class="label">方向</div>
+        <div class="value">账号搭建 · 直播运营 · 内容策划</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 核心能力 -->
+  <div class="section reveal">
+    <h2 class="section-title"><span class="num">02</span> 核心能力</h2>
+    <div class="skills">
+      <span class="skill-tag">📹 短视频拍摄</span>
+      <span class="skill-tag">✂️ 剪辑（剪映 / PR）</span>
+      <span class="skill-tag">📝 文案策划</span>
+      <span class="skill-tag">🎯 账号搭建 & 运营</span>
+      <span class="skill-tag">🔴 直播运营 & 话术</span>
+      <span class="skill-tag secondary">📊 数据分析</span>
+      <span class="skill-tag secondary">💡 内容策略</span>
+      <span class="skill-tag secondary">🎨 基础设计</span>
+      <span class="skill-tag secondary">📱 多平台运营</span>
+    </div>
+  </div>
+
+  <!-- 工作经历 -->
+  <div class="section reveal">
+    <h2 class="section-title"><span class="num">03</span> 工作经历</h2>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-title">编导 / 内容运营</div>
+          <div class="exp-sub">昆明本地 · 传媒相关</div>
+        </div>
+        <div class="exp-date">2024 — 至今</div>
+      </div>
+      <ul>
+        <li>负责账号内容策划、脚本撰写、拍摄执行全流程</li>
+        <li>独立完成选题策划到成片发布，覆盖抖音/小红书/视频号</li>
+        <li>参与直播运营，熟悉直播间话术结构与流量逻辑</li>
+      </ul>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-title">地陪行业 · 全域内容搭建</div>
+          <div class="exp-sub">自主项目 · 昆明地陪赛道</div>
+        </div>
+        <div class="exp-date">2025 — 至今</div>
+      </div>
+      <ul>
+        <li>策划并落地抖音/小红书/闲鱼多平台矩阵账号</li>
+        <li>从零起号，完成人设定位、内容规划、获客闭环</li>
+        <li>产出地陪获客文案体系，累计输出50+篇口播/图文内容</li>
+        <li>探索"内容+私域"的本地服务变现模式</li>
+      </ul>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-title">直播运营培训</div>
+          <div class="exp-sub">交个朋友电商学苑 · 系统培训</div>
+        </div>
+        <div class="exp-date">2025</div>
+      </div>
+      <ul>
+        <li>系统学习直播间标准化执行流程、话术体系</li>
+        <li>掌握主流品类直播脚本库、产品讲解话术</li>
+        <li>了解自然流与付费流打法及直播复盘方法</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 项目案例 -->
+  <div class="section reveal">
+    <h2 class="section-title"><span class="num">04</span> 项目案例</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <div class="p-icon">📱</div>
+        <div class="p-title">地陪账号矩阵搭建</div>
+        <div class="p-desc">
+          抖音/小红书/闲鱼三平台同步布局，从人设规划到内容产出到获客转化，跑通"内容→咨询→成交"闭环。
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="p-icon">📝</div>
+        <div class="p-title">口播文案体系化输出</div>
+        <div class="p-desc">
+          针对地陪行业，建立标准化文案框架，累计产出50+条高质量口播文案，风格统一且有辨识度。
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="p-icon">🍜</div>
+        <div class="p-title">餐饮品牌抖音运营方案</div>
+        <div class="p-desc">
+          为本地餐饮店提供抖音内容策略，从选题到拍摄到发布，实现"用内容拉客到店"的实操方法论。
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="p-icon">💬</div>
+        <div class="p-title">小红书获客内容规划</div>
+        <div class="p-desc">
+          输出五套可直接落地的小红书内容规划方案，覆盖男性向与女性向客群，含人设设计与匹配策略。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 联系方式 -->
+  <div class="reveal">
+    <h2 class="section-title"><span class="num">05</span> 联系方式</h2>
+    <div class="contact-bar">
+      <div class="contact-item">
+        <span class="ci">📧</span>
+        陈治潼 · 短视频运营
+      </div>
+      <div class="contact-item">
+        <span class="ci">📍</span>
+        昆明 · 呈贡
+      </div>
+      <div class="contact-item">
+        <span class="ci">🎯</span>
+        随时到岗
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-quote reveal">
+    "内容不是做出来的，是理解人的需求之后长出来的。"<br>
+    —— 陈治潼
+  </div>
+
+</div>
+
+<script>
+// 粒子背景
+(function(){
+  const container = document.getElementById('particles');
+  for(let i=0;i<40;i++){
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random()*4+2;
+    p.style.width = size+'px'; p.style.height = size+'px';
+    p.style.left = Math.random()*100+'%';
+    p.style.bottom = Math.random()*100+'%';
+    p.style.animationDelay = Math.random()*12+'s';
+    p.style.animationDuration = (Math.random()*8+8)+'s';
+    container.appendChild(p);
+  }
+})();
+
+// 滚动入场
+(function(){
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+})();
+</script>
+</body>
+</html>
