@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日简讯 · 陈治潼</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Microsoft YaHei', 'PingFang SC', system-ui, sans-serif;
+    background:#f7f3ee; color:#2c2416;
+  }
+
+  /* ===== 顶部 ===== */
+  .header {
+    background:linear-gradient(135deg, #1a1a2e, #16213e);
+    color:#f0ece3; text-align:center;
+    padding:3rem 1rem 2rem;
+    position:relative; overflow:hidden;
+  }
+  .header::before {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(circle at 20% 30%, rgba(192,57,43,.12) 0%, transparent 60%),
+               radial-gradient(circle at 80% 70%, rgba(184,134,11,.08) 0%, transparent 50%);
+  }
+  .header h1 { font-size:clamp(1.5rem,3vw,2.2rem); font-weight:900; position:relative; z-index:1; }
+  .header p { font-size:clamp(0.8rem,1.2vw,1rem); color:rgba(240,236,227,.6); margin-top:0.5rem; position:relative; z-index:1; }
+
+  /* ===== 日期导航 ===== */
+  .date-nav {
+    display:flex; align-items:center; justify-content:space-between;
+    max-width:720px; margin:0 auto; padding:1rem 1rem 0;
+  }
+  .date-nav .current-date {
+    font-size:clamp(1rem,1.6vw,1.3rem); font-weight:700; color:#2c2416;
+  }
+  .date-nav .sub {
+    font-size:0.8rem; color:#999;
+  }
+  .nav-arrows { display:flex; gap:0.5rem; }
+  .nav-arrows button {
+    width:36px; height:36px; border-radius:50%; border:1px solid rgba(0,0,0,.1);
+    background:#fff; font-size:1rem; cursor:pointer;
+    transition: all .2s;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .nav-arrows button:hover { background:#f0ece3; border-color:#c0392b; color:#c0392b; }
+  .nav-arrows button:disabled { opacity:0.3; cursor:default; }
+
+  /* ===== 内容容器 ===== */
+  .container { max-width:720px; margin:0 auto; padding:0 1rem 3rem; }
+
+  /* ===== 简讯卡片 ===== */
+  .briefing { margin-top:1rem; display:none; }
+  .briefing.active { display:block; }
+
+  .section-title {
+    font-size:0.85rem; font-weight:700; color:#c0392b;
+    margin:1.5rem 0 0.6rem; padding-bottom:0.3rem;
+    border-bottom:1.5px solid rgba(192,57,43,.15);
+    display:flex; align-items:center; gap:0.4rem;
+  }
+  .section-title .emoji { font-size:1rem; }
+
+  .news-item {
+    background:#fff; border-radius:10px; padding:0.8rem 1rem;
+    margin-bottom:0.5rem;
+    border:1px solid rgba(0,0,0,.04);
+    transition: transform .15s;
+  }
+  .news-item:hover { transform:translateX(3px); }
+  .news-item .title {
+    font-size:0.95rem; font-weight:600; line-height:1.5;
+    color:#2c2416;
+  }
+  .news-item .source {
+    font-size:0.7rem; color:#bbb; margin-top:0.2rem;
+  }
+  .news-item .summary {
+    font-size:0.8rem; color:#888; line-height:1.6; margin-top:0.3rem;
+  }
+
+  .tag-event  { display:inline-block; font-size:0.65rem; padding:0.1rem 0.5rem; border-radius:4px; background:rgba(192,57,43,.08); color:#c0392b; margin-right:0.3rem; }
+  .tag-ai     { display:inline-block; font-size:0.65rem; padding:0.1rem 0.5rem; border-radius:4px; background:rgba(184,134,11,.08); color:#b8860b; margin-right:0.3rem; }
+  .tag-local  { display:inline-block; font-size:0.65rem; padding:0.1rem 0.5rem; border-radius:4px; background:rgba(44,36,22,.06); color:#666; margin-right:0.3rem; }
+  .tag-market { display:inline-block; font-size:0.65rem; padding:0.1rem 0.5rem; border-radius:4px; background:rgba(39,174,96,.08); color:#27ae60; margin-right:0.3rem; }
+
+  /* ===== 归档 ===== */
+  .archive-list {
+    margin-top:1rem; padding:1rem; background:rgba(255,255,255,.3);
+    border-radius:10px; border:1px solid rgba(0,0,0,.04);
+  }
+  .archive-list h3 { font-size:0.85rem; font-weight:700; margin-bottom:0.5rem; color:#666; }
+  .archive-list .day {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:0.4rem 0; border-bottom:1px solid rgba(0,0,0,.03);
+    font-size:0.85rem;
+  }
+  .archive-list .day:last-child { border-bottom:none; }
+  .archive-list .day .d { color:#2c2416; }
+  .archive-list .day .s { font-size:0.7rem; color:#bbb; }
+
+  /* ===== 封底 ===== */
+  .footer {
+    text-align:center; padding:2rem 1rem;
+    font-size:0.75rem; color:#bbb;
+  }
+
+  /* ===== 骨架屏加载 ===== */
+  @keyframes shimmer { 0%{opacity:0.3} 50%{opacity:0.6} 100%{opacity:0.3} }
+  .skeleton { animation: shimmer 1.5s infinite; background:#e0d8d0; border-radius:6px; height:1rem; margin-bottom:0.8rem; }
+
+  /* ===== 响应式 ===== */
+  @media(max-width:480px) {
+    .header { padding:2rem 1rem 1.5rem; }
+    .news-item { padding:0.6rem 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 顶部 -->
+<div class="header">
+  <h1>📰 每日简讯</h1>
+  <p>由雷姆整理 · 每天早晨 9:00 更新</p>
+</div>
+
+<!-- 日期 -->
+<div class="date-nav">
+  <div>
+    <div class="current-date" id="currentDate">2026年5月24日 · 星期日</div>
+    <div class="sub" id="weekTag">第21周</div>
+  </div>
+  <div class="nav-arrows">
+    <button id="prevBtn" onclick="prevDay()">‹</button>
+    <button id="nextBtn" onclick="nextDay()">›</button>
+  </div>
+</div>
+
+<!-- 内容 -->
+<div class="container" id="app">
+
+  <!-- 简讯会在这里渲染 -->
+  <div id="briefingContainer">
+    <div class="skeleton" style="width:40%"></div>
+    <div class="skeleton"></div>
+    <div class="skeleton"></div>
+    <div class="skeleton" style="width:60%"></div>
+  </div>
+
+  <!-- 归档 -->
+  <div class="archive-list" id="archiveList">
+    <h3>📁 历史简讯</h3>
+    <div id="archiveDays"></div>
+  </div>
+</div>
+
+<div class="footer">🩵 雷姆 · 主人今天也要加油呀</div>
+
+<script>
+// ========== 简讯数据（这里每天更新） ==========
+const briefings = {
+  "2026-05-24": {
+    date: "2026年5月24日 · 星期日",
+    week: "第21周",
+    sections: [
+      {
+        title: "🔥 今日热点",
+        emoji: "🔥",
+        items: [
+          { title: "OpenAI发布GPT-5.1，推理能力大幅提升", tag: "AI", source: "TechCrunch", summary: "新模型在数学推理和代码生成方面提升显著，API价格不变" },
+          { title: "抖音本地生活GMV同比增长67%", tag: "市场", source: "36氪", summary: "餐饮类目贡献最大，昆明地区增速高于全国平均水平" },
+          { title: "昆明地铁5号线客流创历史新高", tag: "本地", source: "昆明发布", summary: "周末单日客流突破45万人次，斗南站增幅最大" }
+        ]
+      },
+      {
+        title: "🤖 AI 前沿",
+        emoji: "🤖",
+        items: [
+          { title: "字节跳动发布视频生成模型VideoGen2", tag: "AI", source: "量子位", summary: "支持10分钟长视频生成，画面一致性大幅提升" },
+          { title: "Claude Code开源1900个文件", tag: "AI", source: "Anthropic" },
+          { title: "阿里通义千问上线Mac客户端", tag: "AI", source: "IT之家" }
+        ]
+      },
+      {
+        title: "📈 营销参考",
+        emoji: "📈",
+        items: [
+          { title: "母亲节餐饮数据：到店率同比增32%", tag: "市场", source: "美团报告", summary: "昆明鲜花饼礼盒搜索量增长200%，建议提前布局节日内容" },
+          { title: "小红书本地生活上线团购功能", tag: "市场", source: "亿邦动力", summary: "对餐饮老板来说是新的免费流量入口" }
+        ]
+      },
+      {
+        title: "📍 昆明 · 本地",
+        emoji: "📍",
+        items: [
+          { title: "呈贡今日天气：多云 18-26℃", tag: "本地", source: "中国天气" },
+          { title: "昆明米线节本周六在官渡古镇举办", tag: "本地", source: "春城晚报", summary: "60+家本地米线店参加，适合去拍素材" },
+          { title: "斗南花市夏季鲜花价格同比下降15%", tag: "本地", source: "都市时报" }
+        ]
+      }
+    ]
+  }
+};
+
+// ========== 日期工具 ==========
+const today = "2026-05-24";
+const dates = Object.keys(briefings).sort().reverse();
+let currentIdx = 0;
+
+function formatDate(str) {
+  const d = new Date(str + 'T00:00:00');
+  const days = ['日','一','二','三','四','五','六'];
+  const parts = str.split('-');
+  return `${parts[0]}年${parseInt(parts[1])}月${parseInt(parts[2])}日 · 星期${days[d.getDay()]}`;
+}
+
+function getWeekNumber(str) {
+  const d = new Date(str + 'T00:00:00');
+  const start = new Date(d.getFullYear(), 0, 1);
+  const diff = (d - start + (start.getTimezoneOffset() - d.getTimezoneOffset()) * 60000) / 86400000;
+  return `第${Math.ceil((diff + start.getDay() + 1) / 7)}周`;
+}
+
+// ========== 渲染 ==========
+function renderBriefing(dateStr, brief) {
+  const container = document.getElementById('briefingContainer');
+  const archiveDays = document.getElementById('archiveDays');
+
+  const tagMap = { 'AI':'tag-ai', '本地':'tag-local', '市场':'tag-market', '热点':'tag-event' };
+
+  let html = `<div class="briefing active">`;
+  brief.sections.forEach(s => {
+    html += `<div class="section-title"><span class="emoji">${s.emoji}</span> ${s.title}</div>`;
+    s.items.forEach(item => {
+      const t = tagMap[item.tag] || 'tag-event';
+      html += `<div class="news-item">
+        <div class="title"><span class="${t}">${item.tag}</span>${item.title}</div>
+        ${item.summary ? `<div class="summary">${item.summary}</div>` : ''}
+        <div class="source">${item.source || ''}</div>
+      </div>`;
+    });
+  });
+  html += `</div>`;
+  container.innerHTML = html;
+
+  // 归档
+  let archHtml = '';
+  dates.forEach(d => {
+    const isActive = d === dateStr;
+    archHtml += `<div class="day" onclick="gotoDate('${d}')" style="cursor:pointer;">
+      <span class="d">${isActive ? '👉 ' : ''}${formatDate(d)}</span>
+      <span class="s">${getWeekNumber(d)}</span>
+    </div>`;
+  });
+  archiveDays.innerHTML = archHtml;
+
+  document.getElementById('currentDate').textContent = brief.date;
+  document.getElementById('weekTag').textContent = brief.week;
+
+  document.getElementById('prevBtn').disabled = currentIdx >= dates.length - 1;
+  document.getElementById('nextBtn').disabled = currentIdx <= 0;
+}
+
+function gotoDate(d) {
+  currentIdx = dates.indexOf(d);
+  if (currentIdx >= 0) renderBriefing(d, briefings[d]);
+}
+
+function prevDay() {
+  if (currentIdx < dates.length - 1) {
+    currentIdx++;
+    const d = dates[currentIdx];
+    renderBriefing(d, briefings[d]);
+  }
+}
+
+function nextDay() {
+  if (currentIdx > 0) {
+    currentIdx--;
+    const d = dates[currentIdx];
+    renderBriefing(d, briefings[d]);
+  }
+}
+
+// ========== 初始化 ==========
+renderBriefing(today, briefings[today]);
+</script>
+
+</body>
+</html>
