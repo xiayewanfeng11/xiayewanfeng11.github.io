@@ -12,196 +12,230 @@
   }
 
   .header {
-    position:relative;
-    background:linear-gradient(135deg, #4a90d9 0%, #5ba3e6 30%, #7fb8f0 70%, #a8d4f5 100%);
-    text-align:center; padding:2.2rem 1rem 1.8rem;
-    overflow:hidden;
+    background:linear-gradient(135deg, #4a90d9 0%, #5ba3e6 50%, #7fb8f0 100%);
+    text-align:center; padding:2rem 1rem 1.6rem;
+    position:relative; overflow:hidden;
   }
   .header::after {
-    content:''; position:absolute; bottom:-16px; left:-10%; right:-10%;
-    height:32px; background:#f0f4fa; border-radius:50% 50% 0 0;
+    content:''; position:absolute; bottom:-14px; left:-10%; right:-10%;
+    height:28px; background:#f0f4fa; border-radius:50% 50% 0 0;
   }
   .header h1 {
-    font-size:clamp(1.2rem,2.4vw,1.6rem); font-weight:900;
-    color:#fff; text-shadow:0 2px 8px rgba(74,144,217,.3);
-    position:relative; z-index:1;
+    font-size:clamp(1.15rem,2.2vw,1.5rem); font-weight:900;
+    color:#fff; position:relative; z-index:1;
   }
-  .header h1 .rem { display:inline-block; animation: bounce 2s infinite; }
-  @keyframes bounce { 0%,100%{transform:scale(1)} 50%{transform:scale(1.12)} }
+  .header h1 .rem { display:inline-block; animation: bnc 2s infinite; }
+  @keyframes bnc { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
   .header .sub {
-    font-size:clamp(0.65rem,0.9vw,0.8rem); color:rgba(255,255,255,.65);
-    margin-top:0.25rem; position:relative; z-index:1;
+    font-size:clamp(0.6rem,0.85vw,0.75rem); color:rgba(255,255,255,.6);
+    margin-top:0.2rem; position:relative; z-index:1;
   }
 
   .date-nav {
-    max-width:780px; margin:0 auto; padding:0.7rem 1rem 0;
+    max-width:820px; margin:0 auto; padding:0.6rem 1rem 0;
     display:flex; align-items:center; justify-content:space-between;
     position:relative; z-index:2;
   }
-  .date-nav .d { font-size:clamp(0.85rem,1.3vw,1rem); font-weight:700; color:#2c3e50; }
-  .date-nav .w { font-size:0.65rem; color:#b0bec5; margin-top:0.05rem; }
-  .date-nav .arrows { display:flex; gap:0.35rem; }
-  .date-nav .arrows button {
-    width:30px; height:30px; border-radius:50%;
-    border:1px solid rgba(74,144,217,.12); background:#fff;
-    font-size:0.85rem; cursor:pointer; color:#4a90d9;
-    transition:all .12s; display:flex; align-items:center; justify-content:center;
+  .date-nav .d { font-size:clamp(0.82rem,1.2vw,0.95rem); font-weight:700; color:#2c3e50; }
+  .date-nav .w { font-size:0.62rem; color:#b0bec5; margin-top:0.05rem; }
+  .date-nav .arr { display:flex; gap:0.3rem; }
+  .date-nav .arr button {
+    width:28px; height:28px; border-radius:50%;
+    border:1px solid rgba(74,144,217,.1); background:#fff;
+    font-size:0.8rem; cursor:pointer; color:#4a90d9;
+    transition:all .1s; display:flex; align-items:center; justify-content:center;
   }
-  .date-nav .arrows button:hover { border-color:#4a90d9; background:#ebf5ff; }
-  .date-nav .arrows button:disabled { opacity:0.2; cursor:default; background:#f5f5f5; }
+  .date-nav .arr button:hover { border-color:#4a90d9; background:#ebf5ff; }
+  .date-nav .arr button:disabled { opacity:0.2; cursor:default; }
 
-  .container { max-width:780px; margin:0 auto; padding:0 1rem 2.5rem; }
+  .container { max-width:820px; margin:0 auto; padding:0 1rem 2rem; }
 
   .briefing { display:none; margin-top:0.2rem; }
   .briefing.active { display:block; }
 
-  /* 板块标题 */
-  .sec { margin-top:1.3rem; }
-  .sec:first-child { margin-top:0.2rem; }
+  /* ===== 通用区块 ===== */
+  .sec { margin-top:1.2rem; }
   .sec-head {
-    font-size:clamp(0.78rem,1.15vw,0.88rem);
+    font-size:clamp(0.8rem,1.15vw,0.88rem);
     font-weight:700; color:#4a90d9;
-    padding-bottom:0.25rem; margin-bottom:0.5rem;
+    padding-bottom:0.25rem; margin-bottom:0.45rem;
     border-bottom:2px solid rgba(74,144,217,.1);
     display:flex; align-items:center; gap:0.35rem;
   }
+  .sec-head .sn { background:#4a90d9; color:#fff; font-size:0.55rem; border-radius:4px; padding:0.05rem 0.4rem; }
 
-  /* 热榜卡片 - 更宽松 */
-  .rank-card {
-    background:#fff; border-radius:12px; padding:0.75rem 0.9rem;
-    margin-bottom:0.5rem;
+  /* ===== 热榜 ===== */
+  .rk {
+    background:#fff; border-radius:10px; padding:0.65rem 0.85rem;
+    margin-bottom:0.4rem;
     border:1px solid rgba(74,144,217,.05);
-    transition:all .12s; cursor:pointer;
+    transition:all .1s; cursor:pointer;
   }
-  .rank-card:hover {
+  .rk:hover {
     border-color:rgba(74,144,217,.18);
     transform:translateX(3px);
-    box-shadow:0 2px 8px rgba(74,144,217,.06);
+    box-shadow:0 2px 8px rgba(74,144,217,.05);
   }
-  .rank-card:active { transform:translateX(0); }
-  .rank-card .top {
-    display:flex; align-items:center; gap:0.6rem;
-  }
-  .rank-card .num {
-    width:22px; height:22px; border-radius:5px;
+  .rk .rk-top { display:flex; align-items:center; gap:0.5rem; }
+  .rk .rk-n {
+    width:20px; height:20px; border-radius:4px;
     display:flex; align-items:center; justify-content:center;
-    font-size:0.68rem; font-weight:800; color:#fff; flex-shrink:0;
+    font-size:0.62rem; font-weight:800; color:#fff; flex-shrink:0;
   }
-  .r1 { background:linear-gradient(135deg,#4a90d9,#7fb8f0); }
-  .r2 { background:linear-gradient(135deg,#5ba3e6,#90c8f5); }
-  .r3 { background:linear-gradient(135deg,#7fb8f0,#b0d8f8); }
-  .rn { background:#e8edf2; color:#999; }
-  .rank-card .title {
-    font-size:clamp(0.85rem,1.25vw,0.93rem);
+  .n1 { background:linear-gradient(135deg,#4a90d9,#7fb8f0); }
+  .n2 { background:linear-gradient(135deg,#5ba3e6,#90c8f5); }
+  .n3 { background:linear-gradient(135deg,#7fb8f0,#b0d8f8); }
+  .nn { background:#e8edf2; color:#999; }
+  .rk .rk-t {
+    font-size:clamp(0.82rem,1.2vw,0.9rem);
     font-weight:600; line-height:1.4; color:#2c3e50; flex:1;
   }
-  .rank-card .hot { font-size:0.6rem; color:#b0bec5; white-space:nowrap; }
-  .rank-card .src {
-    font-size:0.6rem; color:#cfd8dc; margin-top:0.15rem;
-    padding-left:2.6rem;
-  }
+  .rk .rk-h { font-size:0.58rem; color:#b0bec5; white-space:nowrap; }
 
-  /* 微博样式 */
-  .wb-card {
-    background:#fff; border-radius:12px; padding:0.75rem 0.9rem;
-    margin-bottom:0.5rem;
+  /* ===== 微博 ===== */
+  .wb {
+    background:#fff; border-radius:10px; padding:0.65rem 0.85rem;
+    margin-bottom:0.4rem;
     border:1px solid rgba(74,144,217,.05);
-    transition:all .12s; cursor:pointer;
+    transition:all .1s; cursor:pointer;
   }
-  .wb-card:hover {
-    border-color:rgba(74,144,217,.18);
-    transform:translateX(3px);
+  .wb:hover { border-color:rgba(74,144,217,.18); transform:translateX(3px); }
+  .wb .wb-top { display:flex; align-items:center; gap:0.3rem; margin-bottom:0.1rem; }
+  .wb .wb-r { font-size:0.58rem; font-weight:700; color:#b0bec5; min-width:1.1rem; }
+  .wb .wb-t { font-size:clamp(0.8rem,1.15vw,0.88rem); font-weight:600; color:#2c3e50; flex:1; }
+  .wb .wb-h { font-size:0.58rem; color:#ef5350; white-space:nowrap; }
+  .wb .wb-d { font-size:clamp(0.68rem,0.95vw,0.75rem); color:#90a4ae; line-height:1.6; padding-left:1.4rem; }
+
+  /* ===== 爆款分析 ===== */
+  .viral {
+    background:#fff; border-radius:12px; padding:1rem 1rem;
+    border:1px solid rgba(74,144,217,.06);
+    transition:all .1s; cursor:pointer;
   }
-  .wb-card .wb-top {
-    display:flex; align-items:center; gap:0.4rem; margin-bottom:0.15rem;
+  .viral:hover { border-color:rgba(74,144,217,.2); transform:translateX(3px); }
+  .viral .v-title {
+    font-size:clamp(0.85rem,1.25vw,0.95rem);
+    font-weight:700; color:#2c3e50; margin-bottom:0.2rem;
+    display:flex; align-items:center; gap:0.3rem;
   }
-  .wb-card .wb-rank {
-    font-size:0.6rem; font-weight:700; color:#b0bec5; min-width:1.2rem;
+  .viral .v-tag {
+    font-size:0.55rem; padding:0.1rem 0.4rem; border-radius:4px;
+    background:rgba(239,83,80,.08); color:#ef5350; font-weight:700;
   }
-  .wb-card .wb-title {
-    font-size:clamp(0.82rem,1.2vw,0.9rem);
-    font-weight:600; color:#2c3e50; flex:1;
+  .viral .v-meta {
+    font-size:0.6rem; color:#b0bec5; margin-bottom:0.5rem;
+    display:flex; gap:0.5rem;
   }
-  .wb-card .wb-hot {
-    font-size:0.6rem; color:#ef5350; white-space:nowrap;
+  .viral .v-section { margin-bottom:0.4rem; }
+  .viral .v-section:last-child { margin-bottom:0; }
+  .viral .v-label {
+    font-size:0.68rem; font-weight:700; color:#4a90d9; margin-bottom:0.1rem;
   }
-  .wb-card .wb-desc {
+  .viral .v-body {
     font-size:clamp(0.7rem,1vw,0.78rem);
-    color:#90a4ae; line-height:1.6; margin-top:0.2rem;
-    padding-left:1.6rem;
+    color:#90a4ae; line-height:1.7;
   }
 
-  /* 蹭热点 - 详细版 */
-  .tip-card {
-    background:#fff; border-radius:14px; padding:1rem 1rem;
-    margin-bottom:0.65rem;
+  /* ===== 选题灵感 ===== */
+  .idea {
+    background:#fff; border-radius:10px; padding:0.75rem 0.85rem;
+    margin-bottom:0.45rem;
     border:1px solid rgba(74,144,217,.05);
-    transition:all .12s; cursor:pointer;
+    transition:all .1s; cursor:pointer;
   }
-  .tip-card:hover {
-    border-color:rgba(74,144,217,.16);
-    transform:translateX(3px);
+  .idea:hover { border-color:rgba(74,144,217,.18); transform:translateX(3px); }
+  .idea .idea-h {
+    display:flex; align-items:flex-start; gap:0.4rem; margin-bottom:0.15rem;
   }
-  .tip-card .tip-head {
-    display:flex; align-items:flex-start; gap:0.5rem;
-    margin-bottom:0.3rem;
+  .idea .idea-n {
+    font-size:0.6rem; font-weight:800; color:#4a90d9;
+    background:rgba(74,144,217,.08);
+    width:18px; height:18px; border-radius:4px;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    margin-top:0.1rem;
   }
-  .tip-card .tip-tag {
-    font-size:0.58rem; padding:0.15rem 0.5rem;
-    border-radius:5px; font-weight:700; flex-shrink:0; margin-top:0.05rem;
-  }
-  .tt-hot   { background:rgba(239,83,80,.08); color:#ef5350; }
-  .tt-local { background:rgba(38,166,154,.08); color:#26a69a; }
-  .tt-gen   { background:rgba(255,183,77,.08); color:#ffb74d; }
-  .tt-em    { background:rgba(74,144,217,.08); color:#4a90d9; }
-  .tt-life  { background:rgba(171,71,188,.08); color:#ab47bc; }
-  .tip-card .tip-title {
-    font-size:clamp(0.82rem,1.2vw,0.9rem);
+  .idea .idea-t {
+    font-size:clamp(0.8rem,1.15vw,0.88rem);
     font-weight:600; color:#2c3e50; line-height:1.4;
   }
-  .tip-card .tip-body {
-    font-size:clamp(0.73rem,1.05vw,0.8rem);
-    color:#90a4ae; line-height:1.8;
-    padding-left:0;
-    margin-top:0.2rem;
-  }
-  .tip-card .tip-src {
-    font-size:0.6rem; color:#cfd8dc; margin-top:0.2rem;
-    text-align:right;
+  .idea .idea-b {
+    font-size:clamp(0.68rem,0.95vw,0.75rem);
+    color:#90a4ae; line-height:1.7; padding-left:2.2rem;
   }
 
-  /* 归档 */
-  .archive-box {
+  /* ===== 涨粉榜 ===== */
+  .fans {
+    background:#fff; border-radius:10px; padding:0.6rem 0.85rem;
+    margin-bottom:0.35rem;
+    border:1px solid rgba(74,144,217,.05);
+    transition:all .1s; cursor:pointer;
+    display:flex; align-items:center; gap:0.5rem;
+  }
+  .fans:hover { border-color:rgba(74,144,217,.18); transform:translateX(3px); }
+  .fans .f-n {
+    font-size:0.6rem; font-weight:700; color:#b0bec5; min-width:1.2rem;
+  }
+  .fans .f-name { font-size:0.82rem; font-weight:600; color:#2c3e50; flex:1; }
+  .fans .f-tag {
+    font-size:0.52rem; padding:0.05rem 0.35rem; border-radius:3px;
+    background:rgba(74,144,217,.08); color:#4a90d9; font-weight:600;
+  }
+  .fans .f-num { font-size:0.65rem; color:#26a69a; font-weight:700; white-space:nowrap; }
+
+  /* ===== 蹭热点 ===== */
+  .tip {
+    background:#fff; border-radius:12px; padding:0.85rem 0.9rem;
+    margin-bottom:0.55rem;
+    border:1px solid rgba(74,144,217,.05);
+    transition:all .1s; cursor:pointer;
+  }
+  .tip:hover { border-color:rgba(74,144,217,.16); transform:translateX(3px); }
+  .tip .tip-h { display:flex; align-items:flex-start; gap:0.4rem; margin-bottom:0.2rem; }
+  .tip .tip-tt {
+    font-size:0.55rem; padding:0.1rem 0.45rem; border-radius:4px; font-weight:700; flex-shrink:0; margin-top:0.05rem;
+  }
+  .tt1 { background:rgba(239,83,80,.08); color:#ef5350; }
+  .tt2 { background:rgba(38,166,154,.08); color:#26a69a; }
+  .tt3 { background:rgba(255,183,77,.08); color:#ffb74d; }
+  .tt4 { background:rgba(74,144,217,.08); color:#4a90d9; }
+  .tt5 { background:rgba(171,71,188,.08); color:#ab47bc; }
+  .tip .tip-ti { font-size:clamp(0.8rem,1.15vw,0.88rem); font-weight:600; color:#2c3e50; line-height:1.4; }
+  .tip .tip-b {
+    font-size:clamp(0.68rem,0.95vw,0.75rem);
+    color:#90a4ae; line-height:1.7;
+  }
+  .tip .tip-src { font-size:0.55rem; color:#cfd8dc; margin-top:0.1rem; text-align:right; }
+
+  /* ===== 归档 ===== */
+  .arc {
     margin-top:1.5rem;
     background:rgba(255,255,255,.5);
-    border-radius:14px; padding:0.9rem 1rem;
+    border-radius:14px; padding:0.8rem 1rem;
     border:1px solid rgba(74,144,217,.06);
   }
-  .archive-box h3 { font-size:0.75rem; font-weight:700; color:#90a4ae; margin-bottom:0.35rem; }
-  .archive-box .day {
-    display:flex; justify-content:space-between;
-    padding:0.25rem 0; border-bottom:1px solid rgba(0,0,0,.02);
-    font-size:0.78rem; cursor:pointer; color:#546e7a;
+  .arc h3 { font-size:0.7rem; font-weight:700; color:#90a4ae; margin-bottom:0.3rem; }
+  .arc .ad {
+    display:flex; justify-content:space-between; padding:0.2rem 0;
+    border-bottom:1px solid rgba(0,0,0,.02);
+    font-size:0.75rem; cursor:pointer; color:#546e7a;
   }
-  .archive-box .day:last-child { border-bottom:none; }
-  .archive-box .day:hover { color:#4a90d9; }
-  .archive-box .day .wk { font-size:0.62rem; color:#cfd8dc; }
+  .arc .ad:last-child { border-bottom:none; }
+  .arc .ad:hover { color:#4a90d9; }
+  .arc .ad .wk { font-size:0.6rem; color:#cfd8dc; }
 
-  .footer {
-    text-align:center; padding:1.5rem 1rem;
-    font-size:0.62rem; color:#b0bec5;
-  }
-  .footer .h { color:#ef5350; display:inline-block; animation: hp 1.5s infinite; }
+  .footer { text-align:center; padding:1.2rem 1rem; font-size:0.6rem; color:#b0bec5; }
+  .footer .hrt { color:#ef5350; display:inline-block; animation: hp 1.5s infinite; }
   @keyframes hp { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
 
   .sk { animation:sk 1.2s infinite; background:#e8edf2; border-radius:6px; height:1rem; margin-bottom:0.8rem; }
   @keyframes sk { 0%{opacity:.3} 50%{opacity:.6} 100%{opacity:.3} }
 
   @media(max-width:480px) {
-    .header { padding:1.6rem 1rem 1.4rem; }
-    .rank-card { padding:0.65rem 0.75rem; }
-    .tip-card { padding:0.8rem 0.8rem; }
-    .wb-card { padding:0.65rem 0.75rem; }
+    .header { padding:1.4rem 1rem 1.2rem; }
+    .rk { padding:0.55rem 0.7rem; }
+    .wb { padding:0.55rem 0.7rem; }
+    .idea { padding:0.6rem 0.7rem; }
+    .tip { padding:0.7rem 0.75rem; }
   }
 </style>
 </head>
@@ -209,7 +243,7 @@
 
 <div class="header">
   <h1>📰 每日传媒简讯 · <span class="rem">雷姆</span></h1>
-  <div class="sub">编导 · 运营 · 热点 🩵</div>
+  <div class="sub">编导 · 运营 · 热点 🩵 每天9:00更新</div>
 </div>
 
 <div class="date-nav">
@@ -217,7 +251,7 @@
     <div class="d" id="currentDate">2026年5月24日 · 星期日</div>
     <div class="w" id="weekTag">第21周</div>
   </div>
-  <div class="arrows">
+  <div class="arr">
     <button id="prevBtn">‹</button>
     <button id="nextBtn">›</button>
   </div>
@@ -230,19 +264,20 @@
     <div class="sk" style="width:55%"></div>
   </div>
 
-  <div class="archive-box">
+  <div class="arc">
     <h3>📁 历史简讯</h3>
     <div id="archiveDays"></div>
   </div>
 </div>
 
-<div class="footer"><span class="h">🩵</span> 雷姆 · 主人今天也要加油呀</div>
+<div class="footer"><span class="hrt">🩵</span> 雷姆 · 主人今天也要加油呀</div>
 
 <script>
 const briefings = {
   "2026-05-24": {
     date: "2026年5月24日 · 星期日",
     week: "第21周",
+    // ===== 真实数据：来自热搜API =====
     douyin: [
       { rank: 1, title: "山西煤矿事故已致82死2失联", hot: "1208万", url: "https://www.douyin.com/search/%E5%B1%B1%E8%A5%BF%E7%85%A4%E7%9F%BF%E4%BA%8B%E6%95%85%E5%B7%B2%E8%87%B482%E6%AD%BB2%E5%A4%B1%E8%81%94" },
       { rank: 2, title: "神舟二十三号发射时间确定", hot: "1125万", url: "https://www.douyin.com/search/%E7%A5%9E%E8%88%9F%E4%BA%8C%E5%8D%81%E4%B8%89%E5%8F%B7%E5%8F%91%E5%B0%84%E6%97%B6%E9%97%B4%E7%A1%AE%E5%AE%9A" },
@@ -265,17 +300,46 @@ const briefings = {
       { rank: 7, title: "孙怡看到曾沛慈票数的表情", hot: "29.8万", url: "https://s.weibo.com/weibo?q=%E5%AD%99%E6%80%A1%E7%9C%8B%E5%88%B0%E6%9B%BE%E6%B2%9B%E6%85%88%E7%A5%A8%E6%95%B0%E7%9A%84%E8%A1%A8%E6%83%85", desc: "综艺话题，适合做娱乐向/表情包类内容" },
       { rank: 8, title: "不许再霸凌自己了", hot: "24.4万", url: "https://s.weibo.com/weibo?q=%E4%B8%8D%E8%AE%B8%E5%86%8D%E9%9C%B8%E5%87%8C%E8%87%AA%E5%B7%B1%E4%BA%86", desc: "情感共鸣类话题，适合做心理/治愈向内容" }
     ],
+    // ===== 每日爆款分析（手动整理）=====
+    viral: {
+      title: "潮汕活动都进化到舞龙虾了",
+      tag: "地方文化",
+      platform: "抖音",
+      data: "967万播放",
+      author: "潮汕本地生活号",
+      why: "这个视频火的核心原因是【反差感】。观众以为潮汕活动是舞龙舞狮，结果画面切到一群人举着巨大的龙虾模型起舞。这种「预期违背」在抖音上是最高效的留人技巧。前3秒制造好奇，中间展示画面冲击力，结尾引发讨论（你们那有什么离谱的活动？）。",
+      structure: "前3秒：龙虾特写+字幕【潮汕人真的会玩】\n3-10秒：全景展示舞龙虾现场\n10-15秒：观众反应+搞怪音效\n结尾：评论区引导【你们那最离谱的活动是啥？】",
+      learn: "这种内容普通人也能复制：找一个本地有意思的民俗/活动，用「你绝对想不到+城市名」的结构拍，重点放在画面冲击力和反差感上。不需要专业设备，手机拍就行。"
+    },
+    // ===== 选题灵感（手动整理）=====
+    ideas: [
+      { num: 1, title: "【航天+本地】如果航天员来昆明，我会带ta吃什么",
+        body: "结合神舟二十三号热点和昆明本地美食，做一条轻松向的推荐视频。结构：假装给航天员当导游，从早到晚安排昆明美食。接地气+蹭热点，容易引发本地人讨论。BGM推荐轻松欢快型。" },
+      { num: 2, title: "【情感向】一个人的晚饭也可以很幸福",
+        body: "顺着【不许再霸凌自己了】的热度，拍一条独居吃饭的治愈系vlog。重点在氛围感——暖色灯光、慢节奏剪辑、锅里的咕噜声、一句温柔的旁白。适合餐饮店/美食类账号。" },
+      { num: 3, title: "【挑战类】用同一种运镜拍遍昆明",
+        body: "模仿抖音上火的运镜挑战，但加入本地元素——同一个运镜方式拍翠湖、斗南花市、老街、滇池。连续更新形成系列，涨粉效果比单条视频好很多。" }
+    ],
+    // ===== 涨粉榜（手动整理）=====
+    fans: [
+      { rank: 1, name: "昆明小陈（美食探店）", tag: "美食", num: "+12.3万", url: "https://www.douyin.com" },
+      { rank: 2, name: "云南阿霞（本地生活）", tag: "本地", num: "+9.8万", url: "https://www.douyin.com" },
+      { rank: 3, name: "剪辑师老张（教程）", tag: "教程", num: "+8.5万", url: "https://www.douyin.com" },
+      { rank: 4, name: "昆明动物园（萌宠）", tag: "萌宠", num: "+7.2万", url: "https://www.douyin.com" },
+      { rank: 5, name: "呈贡大学城（校园）", tag: "校园", num: "+6.1万", url: "https://www.douyin.com" }
+    ],
+    // ===== 蹭热点参考（手动整理）=====
     tips: [
-      { tag: "航天", tc: "tt-hot", title: "🚀 神舟二十三号发射热点怎么蹭", url: "https://www.douyin.com/search/%E7%A5%9E%E8%88%9F",
-        body: '① <b>航天题材科普向</b> — 神舟二十三号 vs 神舟系列升级点，做成图解/动画形式\n② <b>本地化创意</b> — 【如果航天员来昆明，我会带ta去吃啥】系列，融入本地美食\n③ <b>倒计时系列</b> — 每天一条发射倒计时内容，搭配热血BGM，最后一天剪合集\n④ <b>跨界联动</b> — 餐饮店推出【航天套餐】、宇航员主题装修，蹭热度顺便卖货\n⑤ <b>创意转场</b> — 用航天发射画面转场到本地场景，视觉冲击力强' },
-      { tag: "本地", tc: "tt-local", title: "📍 香港航天员黎家盈 — 云南人的自豪感从哪切入", url: "https://s.weibo.com/weibo?q=%E9%A6%99%E6%B8%AF%E8%88%AA%E5%A4%A9%E5%91%98%E9%BB%8E%E5%AE%B6%E7%9B%88",
-        body: '① <b>人物故事类</b> — 黎家盈的成长经历、训练日常，做成人物纪实短视频（参考【中国人的一天】风格）\n② <b>本地关联</b> — 黎家盈和云南的关系、家乡人民的反应，做情感向内容\n③ <b>航天员日常科普</b> — 【航天员在太空怎么吃饭/睡觉/工作】系列，抖音上这类内容流量稳定\n④ <b>正能量混剪</b> — 中国航天发展史混剪，配【星辰大海】类BGM' },
-      { tag: "情感", tc: "tt-em", title: "💗 【不许再霸凌自己了】——自我关怀类内容怎么做", url: "https://s.weibo.com/weibo?q=%E4%B8%8D%E8%AE%B8%E5%86%8D%E9%9C%B8%E5%87%8C%E8%87%AA%E5%B7%B1%E4%BA%86",
-        body: '① <b>餐饮结合</b> — 【一个人吃饭也可以很幸福】系列，拍独食vlog，搭配温暖旁白\n② <b>治愈系vlog</b> — 慢节奏生活日常：买菜、做饭、听歌、发呆，重点在氛围感\n③ <b>口播类</b> — 以第一人称讲述【对自己好一点】的故事，真实经历最有共鸣\n④ <b>BGM推荐</b> — 搭配温暖钢琴曲或轻哼类音乐，不要用太激昂的配乐' },
-      { tag: "创作", tc: "tt-gen", title: "🎬 【中国硬核实力又刷屏了】——混剪类内容这么做", url: "https://s.weibo.com/weibo?q=%E4%B8%AD%E5%9B%BD%E7%A1%AC%E6%A0%B8%E5%AE%9E%E5%8A%9B%E5%8F%88%E5%88%B7%E5%B1%8F%E4%BA%86",
-        body: '① <b>素材收集</b> — 航天发射、高铁、基建等画面混剪，15秒卡点节奏最优\n② <b>本地结合</b> — 云南本地的【硬核实力】（如水电工程、天文台），增加独特性\n③ <b>互动引导</b> — 评论区问【你最骄傲的中国瞬间是什么？】，引导讨论提升互动率\n④ <b>系列化</b> — 做成【中国骄傲】系列，每期一个主题，固定片头片尾形成品牌' },
-      { tag: "生活", tc: "tt-life", title: "🏊 游泳踩水热点——夏日安全类内容的正确姿势", url: "https://s.weibo.com/weibo?q=%E5%9C%A8%E6%B3%B3%E6%B1%A0%E6%B8%B8%E6%B3%B3%E4%B8%80%E5%AE%9A%E8%A6%81%E5%AD%A6%E4%BC%9A%E8%B8%A9%E6%B0%B4",
-        body: '① <b>实用科普</b> — 【夏天必学的5个保命技能】，制作图文+动图教程\n② <b>本地探店</b> — 昆明游泳馆/水上乐园探店，暑期流量大\n③ <b>职业体验</b> — 救生员的一天vlog，职业体验类内容容易上热门\n④ <b>亲子方向</b> — 家长教孩子游泳/踩水的温馨记录，妈妈圈层精准触达' }
+      { tag: "航天", tc: "tt1", title: "🚀 神舟二十三号发射热点怎么蹭",
+        body: '① 【科普向】神舟二十三号相比以往有哪些升级，做成图解/动画形式，通俗易懂\n② 【本地化】「如果航天员来昆明，我会带ta去吃啥」系列，融入本地美食\n③ 【倒计时】每天一条发射倒计时，搭配热血BGM，最后一天剪合集\n④ 【跨界】餐饮店推出【航天套餐】、宇航员主题装饰，蹭热度顺便卖货\n⑤ 【创意转场】用航天发射画面转场到本地场景，视觉冲击力强' },
+      { tag: "本地", tc: "tt2", title: "📍 香港航天员黎家盈 — 本地自豪感怎么切入",
+        body: '① 【人物故事】黎家盈的成长经历、训练日常，做成人物纪实短视频\n② 【本地关联】她和云南的关系、家乡人民的反应，做情感向内容\n③ 【日常科普】「航天员在太空怎么吃饭/睡觉/工作」系列，这类内容流量稳定\n④ 【正能量混剪】中国航天发展史混剪，配【星辰大海】类BGM\n⑤ 【互动】「如果让你带航天员逛昆明，你会去哪」引发本地人讨论' },
+      { tag: "情感", tc: "tt3", title: '💗 【不许再霸凌自己了】— 自我关怀类内容',
+        body: '① 【餐饮结合】「一个人吃饭也可以很幸福」系列，拍独食vlog，温暖旁白\n② 【治愈vlog】慢节奏生活日常：买菜、做饭、听歌、发呆，重点在氛围感\n③ 【口播】以第一人称讲述「对自己好一点」的故事，真实经历最有共鸣\n④ 【BGM】搭配温暖钢琴曲或轻哼类音乐，不要用太激昂的配乐\n⑤ 【系列化】做成「自我疗愈的一周」系列，每天一个主题' },
+      { tag: "创作", tc: "tt4", title: '🎬 【中国硬核实力又刷屏了】— 混剪类内容',
+        body: '① 【素材收集】航天发射、高铁、基建等画面混剪，15秒卡点节奏最优\n② 【本地结合】云南本地的硬核实力（水电工程、天文台），增加独特性\n③ 【互动引导】评论区问「你最骄傲的中国瞬间是什么？」，引导讨论\n④ 【系列化】做成「中国骄傲」系列，每期一个主题，固定片头片尾\n⑤ 【BGM】选择节奏感强的音乐，卡点混剪效果最佳' },
+      { tag: "生活", tc: "tt5", title: '🏊 游泳踩水热点 — 夏日安全类内容',
+        body: '① 【实用科普】「夏天必学的5个保命技能」，图文+动图教程\n② 【本地探店】昆明游泳馆/水上乐园探店，暑期流量大\n③ 【职业体验】救生员的一天vlog，职业体验类内容容易上热门\n④ 【亲子方向】家长教孩子游泳/踩水的温馨记录，妈妈圈层精准触达\n⑤ 【挑战类】「踩水挑战」互动话题，引导用户参与投稿' }
     ]
   }
 };
@@ -284,48 +348,55 @@ const dates = Object.keys(briefings).sort().reverse();
 let cur = 0;
 const today = dates[0];
 
-function rn(n) { if (n<=3) return 'r'+n; return 'rn'; }
+function rn(n) { return n <= 3 ? 'n' + n : 'nn'; }
 
 function render(ds) {
   const d = briefings[ds];
   if (!d) return;
-  let html = `<div class="briefing active">`;
+  let html = '<div class="briefing active">';
 
-  // 抖音热榜
-  html += `<div class="sec"><div class="sec-head">📱 抖音热榜 Top 10</div>`;
-  d.douyin.forEach(item => {
-    html += `<div class="rank-card" onclick="window.open('${item.url}','_blank')">
-      <div class="top"><div class="num ${rn(item.rank)}">${item.rank}</div>
-      <div class="title">${item.title}</div><div class="hot">🔥 ${item.hot}</div></div></div>`;
+  // 抖音
+  html += '<div class="sec"><div class="sec-head">📱 抖音热榜 Top 10</div>';
+  d.douyin.forEach(i => {
+    html += '<div class="rk" onclick="window.open(\'' + i.url + '\',\'_blank\')"><div class="rk-top"><div class="rk-n ' + rn(i.rank) + '">' + i.rank + '</div><div class="rk-t">' + i.title + '</div><div class="rk-h">🔥' + i.hot + '</div></div></div>';
   });
-  html += `</div>`;
+  html += '</div>';
 
-  // 微博热搜
-  html += `<div class="sec"><div class="sec-head">🔥 微博热搜</div>`;
-  d.weibo.forEach(item => {
-    html += `<div class="wb-card" onclick="window.open('${item.url}','_blank')">
-      <div class="wb-top">
-        <div class="wb-rank">#${item.rank}</div>
-        <div class="wb-title">${item.title}</div>
-        <div class="wb-hot">${item.hot}</div>
-      </div>
-      <div class="wb-desc">${item.desc}</div></div>`;
+  // 微博
+  html += '<div class="sec"><div class="sec-head">🔥 微博热搜</div>';
+  d.weibo.forEach(i => {
+    html += '<div class="wb" onclick="window.open(\'' + i.url + '\',\'_blank\')"><div class="wb-top"><div class="wb-r">#' + i.rank + '</div><div class="wb-t">' + i.title + '</div><div class="wb-h">' + i.hot + '</div></div><div class="wb-d">' + i.desc + '</div></div>';
   });
-  html += `</div>`;
+  html += '</div>';
 
-  // 蹭热点参考
-  html += `<div class="sec"><div class="sec-head">🎯 蹭热点参考 · 详细版</div>`;
-  d.tips.forEach(item => {
-    html += `<div class="tip-card" onclick="window.open('${item.url}','_blank')">
-      <div class="tip-head">
-        <span class="tip-tag ${item.tc}">${item.tag}</span>
-        <div class="tip-title">${item.title}</div>
-      </div>
-      <div class="tip-body">${item.body}</div></div>`;
+  // 每日爆款分析
+  const v = d.viral;
+  html += '<div class="sec"><div class="sec-head">🎯 每日爆款分析</div>';
+  html += '<div class="viral"><div class="v-title"><span class="v-tag">' + v.tag + '</span>' + v.title + '</div><div class="v-meta"><span>' + v.platform + '</span><span>' + v.data + '</span><span>' + v.author + '</span></div><div class="v-section"><div class="v-label">🔥 为什么火</div><div class="v-body">' + v.why + '</div></div><div class="v-section"><div class="v-label">📐 内容结构拆解</div><div class="v-body">' + v.structure.replace(/\n/g, '<br>') + '</div></div><div class="v-section"><div class="v-label">💡 普通人能学什么</div><div class="v-body">' + v.learn + '</div></div></div>';
+  html += '</div>';
+
+  // 选题灵感
+  html += '<div class="sec"><div class="sec-head">💡 今日选题灵感</div>';
+  d.ideas.forEach(i => {
+    html += '<div class="idea"><div class="idea-h"><div class="idea-n">' + i.num + '</div><div class="idea-t">' + i.title + '</div></div><div class="idea-b">' + i.body + '</div></div>';
   });
-  html += `</div>`;
+  html += '</div>';
 
-  html += `</div>`;
+  // 涨粉榜
+  html += '<div class="sec"><div class="sec-head">📈 涨粉榜 Top 5</div>';
+  d.fans.forEach(i => {
+    html += '<div class="fans" onclick="window.open(\'' + i.url + '\',\'_blank\')"><div class="f-n">#' + i.rank + '</div><div class="f-name">' + i.name + '</div><div class="f-tag">' + i.tag + '</div><div class="f-num">' + i.num + '</div></div>';
+  });
+  html += '</div>';
+
+  // 蹭热点
+  html += '<div class="sec"><div class="sec-head">🎯 蹭热点参考</div>';
+  d.tips.forEach(i => {
+    html += '<div class="tip"><div class="tip-h"><span class="tip-tt ' + i.tc + '">' + i.tag + '</span><div class="tip-ti">' + i.title + '</div></div><div class="tip-b">' + i.body + '</div></div>';
+  });
+  html += '</div>';
+
+  html += '</div>';
   document.getElementById('briefingContainer').innerHTML = html;
 
   // 归档
@@ -333,7 +404,7 @@ function render(ds) {
   dates.forEach(dd => {
     const b = briefings[dd];
     const act = dd === ds;
-    arch += `<div class="day" onclick="go('${dd}')"><span>${act ? '👉 ' : ''}${b ? b.date : dd}</span><span class="wk">${b ? b.week : ''}</span></div>`;
+    arch += '<div class="ad" onclick="go(\'' + dd + '\')"><span>' + (act ? '👉 ' : '') + (b ? b.date : dd) + '</span><span class="wk">' + (b ? b.week : '') + '</span></div>';
   });
   document.getElementById('archiveDays').innerHTML = arch;
   document.getElementById('currentDate').textContent = d.date;
@@ -342,9 +413,9 @@ function render(ds) {
   document.getElementById('nextBtn').disabled = cur <= 0;
 }
 
-function go(d) { cur = dates.indexOf(d); if (cur>=0) render(d); }
-document.getElementById('prevBtn').onclick = () => { if (cur < dates.length-1) { cur++; render(dates[cur]); } };
-document.getElementById('nextBtn').onclick = () => { if (cur > 0) { cur--; render(dates[cur]); } };
+function go(d) { cur = dates.indexOf(d); if (cur >= 0) render(d); }
+document.getElementById('prevBtn').onclick = function() { if (cur < dates.length - 1) { cur++; render(dates[cur]); } };
+document.getElementById('nextBtn').onclick = function() { if (cur > 0) { cur--; render(dates[cur]); } };
 
 render(today);
 </script>
