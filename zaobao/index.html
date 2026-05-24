@@ -11,242 +11,211 @@
     background:#f0f4fa; color:#2c3e50;
   }
 
-  /* ===== 顶部 ===== */
   .header {
     position:relative;
     background:linear-gradient(135deg, #4a90d9 0%, #5ba3e6 30%, #7fb8f0 70%, #a8d4f5 100%);
-    text-align:center; padding:2.5rem 1rem 2rem;
+    text-align:center; padding:2.2rem 1rem 1.8rem;
     overflow:hidden;
   }
   .header::after {
-    content:'';
-    position:absolute; bottom:-20px; left:-10%; right:-10%;
-    height:40px; background:#f0f4fa;
-    border-radius:50% 50% 0 0;
-  }
-  /* 顶部装饰小元素 */
-  .header-deco {
-    position:absolute; pointer-events:none; font-size:1.5rem; opacity:0.15;
-    animation: floatDeco 6s infinite ease-in-out;
-  }
-  @keyframes floatDeco {
-    0%,100% { transform:translateY(0) rotate(0deg); }
-    50% { transform:translateY(-10px) rotate(10deg); }
+    content:''; position:absolute; bottom:-16px; left:-10%; right:-10%;
+    height:32px; background:#f0f4fa; border-radius:50% 50% 0 0;
   }
   .header h1 {
-    font-size:clamp(1.3rem,2.6vw,1.8rem); font-weight:900;
+    font-size:clamp(1.2rem,2.4vw,1.6rem); font-weight:900;
     color:#fff; text-shadow:0 2px 8px rgba(74,144,217,.3);
     position:relative; z-index:1;
   }
-  .header h1 .rem-icon { font-size:1.2em; display:inline-block; animation: bounce 2s infinite; }
-  @keyframes bounce { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
-  .header .subtitle {
-    font-size:clamp(0.7rem,1vw,0.85rem); color:rgba(255,255,255,.7);
-    margin-top:0.3rem; position:relative; z-index:1;
-  }
-  .header .mascot {
-    position:absolute; right:5%; bottom:30%;
-    font-size:clamp(2rem,5vw,4rem); opacity:0.12;
-    animation: floatDeco 4s infinite ease-in-out reverse;
+  .header h1 .rem { display:inline-block; animation: bounce 2s infinite; }
+  @keyframes bounce { 0%,100%{transform:scale(1)} 50%{transform:scale(1.12)} }
+  .header .sub {
+    font-size:clamp(0.65rem,0.9vw,0.8rem); color:rgba(255,255,255,.65);
+    margin-top:0.25rem; position:relative; z-index:1;
   }
 
-  /* ===== 日期导航 ===== */
   .date-nav {
-    max-width:820px; margin:0 auto; padding:0.8rem 1rem 0;
+    max-width:780px; margin:0 auto; padding:0.7rem 1rem 0;
     display:flex; align-items:center; justify-content:space-between;
     position:relative; z-index:2;
   }
-  .date-nav .current-date { font-size:clamp(0.9rem,1.4vw,1.1rem); font-weight:700; color:#2c3e50; }
-  .date-nav .sub { font-size:0.7rem; color:#b0bec5; margin-top:0.1rem; }
-  .date-nav .arrows { display:flex; gap:0.4rem; }
+  .date-nav .d { font-size:clamp(0.85rem,1.3vw,1rem); font-weight:700; color:#2c3e50; }
+  .date-nav .w { font-size:0.65rem; color:#b0bec5; margin-top:0.05rem; }
+  .date-nav .arrows { display:flex; gap:0.35rem; }
   .date-nav .arrows button {
-    width:32px; height:32px; border-radius:50%;
-    border:1px solid rgba(74,144,217,.15); background:#fff;
-    font-size:0.9rem; cursor:pointer; color:#4a90d9;
-    transition:all .15s; display:flex; align-items:center; justify-content:center;
-    box-shadow:0 1px 3px rgba(0,0,0,.04);
+    width:30px; height:30px; border-radius:50%;
+    border:1px solid rgba(74,144,217,.12); background:#fff;
+    font-size:0.85rem; cursor:pointer; color:#4a90d9;
+    transition:all .12s; display:flex; align-items:center; justify-content:center;
   }
   .date-nav .arrows button:hover { border-color:#4a90d9; background:#ebf5ff; }
-  .date-nav .arrows button:disabled { opacity:0.25; cursor:default; background:#f5f5f5; }
+  .date-nav .arrows button:disabled { opacity:0.2; cursor:default; background:#f5f5f5; }
 
-  .container { max-width:820px; margin:0 auto; padding:0 1rem 3rem; }
+  .container { max-width:780px; margin:0 auto; padding:0 1rem 2.5rem; }
 
-  .briefing { display:none; margin-top:0.3rem; }
+  .briefing { display:none; margin-top:0.2rem; }
   .briefing.active { display:block; }
 
-  /* ===== 板块标题（雷姆风格） ===== */
-  .sec { margin-top:1.2rem; }
-  .sec:first-child { margin-top:0.3rem; }
+  /* 板块标题 */
+  .sec { margin-top:1.3rem; }
+  .sec:first-child { margin-top:0.2rem; }
   .sec-head {
-    display:flex; align-items:center; gap:0.4rem;
-    font-size:clamp(0.8rem,1.2vw,0.9rem);
+    font-size:clamp(0.78rem,1.15vw,0.88rem);
     font-weight:700; color:#4a90d9;
-    padding-bottom:0.3rem; margin-bottom:0.5rem;
-    border-bottom:2px solid rgba(74,144,217,.12);
+    padding-bottom:0.25rem; margin-bottom:0.5rem;
+    border-bottom:2px solid rgba(74,144,217,.1);
+    display:flex; align-items:center; gap:0.35rem;
   }
-  .sec-head .emoji { font-size:0.85rem; }
 
-  /* ===== 热榜卡片 ===== */
+  /* 热榜卡片 - 更宽松 */
   .rank-card {
-    background:#fff; border-radius:14px; padding:0.8rem 1rem;
-    margin-bottom:0.55rem;
-    border:1px solid rgba(74,144,217,.06);
-    transition:all .15s; cursor:pointer;
-    box-shadow:0 1px 4px rgba(0,0,0,.02);
+    background:#fff; border-radius:12px; padding:0.75rem 0.9rem;
+    margin-bottom:0.5rem;
+    border:1px solid rgba(74,144,217,.05);
+    transition:all .12s; cursor:pointer;
   }
   .rank-card:hover {
-    border-color:rgba(74,144,217,.2);
+    border-color:rgba(74,144,217,.18);
     transform:translateX(3px);
-    box-shadow:0 2px 10px rgba(74,144,217,.08);
+    box-shadow:0 2px 8px rgba(74,144,217,.06);
   }
   .rank-card:active { transform:translateX(0); }
-  .rank-card .rank-top {
+  .rank-card .top {
     display:flex; align-items:center; gap:0.6rem;
   }
-  .rank-card .rank-num {
-    width:24px; height:24px; border-radius:6px;
+  .rank-card .num {
+    width:22px; height:22px; border-radius:5px;
     display:flex; align-items:center; justify-content:center;
-    font-size:0.72rem; font-weight:800; color:#fff; flex-shrink:0;
+    font-size:0.68rem; font-weight:800; color:#fff; flex-shrink:0;
   }
   .r1 { background:linear-gradient(135deg,#4a90d9,#7fb8f0); }
   .r2 { background:linear-gradient(135deg,#5ba3e6,#90c8f5); }
   .r3 { background:linear-gradient(135deg,#7fb8f0,#b0d8f8); }
   .rn { background:#e8edf2; color:#999; }
-
-  .rank-card .rank-title {
-    font-size:clamp(0.85rem,1.3vw,0.95rem);
+  .rank-card .title {
+    font-size:clamp(0.85rem,1.25vw,0.93rem);
     font-weight:600; line-height:1.4; color:#2c3e50; flex:1;
   }
-  .rank-card .rank-hot { font-size:0.62rem; color:#b0bec5; white-space:nowrap; }
-  .rank-card .rank-desc {
-    font-size:clamp(0.72rem,1.05vw,0.8rem);
-    color:#90a4ae; line-height:1.6; margin-top:0.25rem;
-    padding-left:2.8rem;
-  }
-  .rank-card .link-hint {
-    font-size:0.6rem; color:#b0bec5; margin-top:0.15rem;
-    padding-left:2.8rem;
+  .rank-card .hot { font-size:0.6rem; color:#b0bec5; white-space:nowrap; }
+  .rank-card .src {
+    font-size:0.6rem; color:#cfd8dc; margin-top:0.15rem;
+    padding-left:2.6rem;
   }
 
-  /* ===== 热点指南 ===== */
-  .tip-card {
-    background:#fff; border-radius:12px; padding:0.85rem 1rem;
+  /* 微博样式 */
+  .wb-card {
+    background:#fff; border-radius:12px; padding:0.75rem 0.9rem;
     margin-bottom:0.5rem;
-    border:1px solid rgba(74,144,217,.06);
-    transition:all .15s; cursor:pointer;
-    box-shadow:0 1px 3px rgba(0,0,0,.02);
+    border:1px solid rgba(74,144,217,.05);
+    transition:all .12s; cursor:pointer;
   }
-  .tip-card:hover {
+  .wb-card:hover {
     border-color:rgba(74,144,217,.18);
-    transform:translateX(2px);
+    transform:translateX(3px);
   }
-  .tip-card .tip-header {
+  .wb-card .wb-top {
     display:flex; align-items:center; gap:0.4rem; margin-bottom:0.15rem;
   }
-  .tip-card .tip-title {
-    font-size:clamp(0.82rem,1.25vw,0.92rem);
-    font-weight:600; color:#2c3e50;
+  .wb-card .wb-rank {
+    font-size:0.6rem; font-weight:700; color:#b0bec5; min-width:1.2rem;
+  }
+  .wb-card .wb-title {
+    font-size:clamp(0.82rem,1.2vw,0.9rem);
+    font-weight:600; color:#2c3e50; flex:1;
+  }
+  .wb-card .wb-hot {
+    font-size:0.6rem; color:#ef5350; white-space:nowrap;
+  }
+  .wb-card .wb-desc {
+    font-size:clamp(0.7rem,1vw,0.78rem);
+    color:#90a4ae; line-height:1.6; margin-top:0.2rem;
+    padding-left:1.6rem;
+  }
+
+  /* 蹭热点 - 详细版 */
+  .tip-card {
+    background:#fff; border-radius:14px; padding:1rem 1rem;
+    margin-bottom:0.65rem;
+    border:1px solid rgba(74,144,217,.05);
+    transition:all .12s; cursor:pointer;
+  }
+  .tip-card:hover {
+    border-color:rgba(74,144,217,.16);
+    transform:translateX(3px);
+  }
+  .tip-card .tip-head {
+    display:flex; align-items:flex-start; gap:0.5rem;
+    margin-bottom:0.3rem;
   }
   .tip-card .tip-tag {
-    display:inline-block; font-size:0.58rem; padding:0.1rem 0.45rem;
-    border-radius:4px; font-weight:600; flex-shrink:0;
+    font-size:0.58rem; padding:0.15rem 0.5rem;
+    border-radius:5px; font-weight:700; flex-shrink:0; margin-top:0.05rem;
   }
-  .tt-food  { background:rgba(74,144,217,.08); color:#4a90d9; }
+  .tt-hot   { background:rgba(239,83,80,.08); color:#ef5350; }
   .tt-local { background:rgba(38,166,154,.08); color:#26a69a; }
   .tt-gen   { background:rgba(255,183,77,.08); color:#ffb74d; }
-  .tt-mkt   { background:rgba(239,83,80,.08); color:#ef5350; }
+  .tt-em    { background:rgba(74,144,217,.08); color:#4a90d9; }
+  .tt-life  { background:rgba(171,71,188,.08); color:#ab47bc; }
+  .tip-card .tip-title {
+    font-size:clamp(0.82rem,1.2vw,0.9rem);
+    font-weight:600; color:#2c3e50; line-height:1.4;
+  }
   .tip-card .tip-body {
-    font-size:clamp(0.72rem,1.05vw,0.8rem);
-    color:#90a4ae; line-height:1.65;
+    font-size:clamp(0.73rem,1.05vw,0.8rem);
+    color:#90a4ae; line-height:1.8;
+    padding-left:0;
+    margin-top:0.2rem;
   }
-  .tip-card .link-hint {
-    font-size:0.6rem; color:#b0bec5; margin-top:0.1rem; text-align:right;
-  }
-
-  /* ===== BGM ===== */
-  .bgm-card {
-    display:flex; align-items:center; gap:0.7rem;
-    background:#fff; border-radius:12px; padding:0.65rem 1rem;
-    margin-bottom:0.4rem;
-    border:1px solid rgba(74,144,217,.06);
-    transition:all .12s; cursor:pointer;
-  }
-  .bgm-card:hover { border-color:rgba(74,144,217,.18); }
-  .bgm-card .bgm-num {
-    font-size:0.65rem; font-weight:700; color:#b0bec5;
-    min-width:1.4rem; text-align:right;
-  }
-  .bgm-card .bgm-info { flex:1; }
-  .bgm-card .bgm-name { font-size:0.85rem; font-weight:600; color:#2c3e50; }
-  .bgm-card .bgm-artist { font-size:0.7rem; color:#b0bec5; }
-  .bgm-card .bgm-tag {
-    font-size:0.58rem; padding:0.1rem 0.45rem; border-radius:4px;
-    background:rgba(74,144,217,.08); color:#4a90d9; flex-shrink:0;
+  .tip-card .tip-src {
+    font-size:0.6rem; color:#cfd8dc; margin-top:0.2rem;
+    text-align:right;
   }
 
-  /* ===== 新闻卡片 ===== */
-  .news-card {
-    background:#fff; border-radius:10px; padding:0.75rem 1rem;
-    margin-bottom:0.4rem;
-    border:1px solid rgba(74,144,217,.04);
-    transition:all .12s; cursor:pointer;
-  }
-  .news-card:hover { border-color:rgba(74,144,217,.14); transform:translateX(2px); }
-  .news-card .nc-title { font-size:0.87rem; font-weight:600; color:#2c3e50; }
-  .news-card .nc-desc { font-size:0.75rem; color:#90a4ae; line-height:1.6; margin-top:0.15rem; }
-
-  /* ===== 归档 ===== */
+  /* 归档 */
   .archive-box {
     margin-top:1.5rem;
     background:rgba(255,255,255,.5);
-    border-radius:14px; padding:1rem 1rem;
+    border-radius:14px; padding:0.9rem 1rem;
     border:1px solid rgba(74,144,217,.06);
   }
-  .archive-box h3 { font-size:0.78rem; font-weight:700; color:#90a4ae; margin-bottom:0.4rem; display:flex; align-items:center; gap:0.3rem; }
+  .archive-box h3 { font-size:0.75rem; font-weight:700; color:#90a4ae; margin-bottom:0.35rem; }
   .archive-box .day {
     display:flex; justify-content:space-between;
-    padding:0.3rem 0; border-bottom:1px solid rgba(0,0,0,.03);
+    padding:0.25rem 0; border-bottom:1px solid rgba(0,0,0,.02);
     font-size:0.78rem; cursor:pointer; color:#546e7a;
   }
   .archive-box .day:last-child { border-bottom:none; }
   .archive-box .day:hover { color:#4a90d9; }
-  .archive-box .day .wk { font-size:0.63rem; color:#cfd8dc; }
+  .archive-box .day .wk { font-size:0.62rem; color:#cfd8dc; }
 
   .footer {
-    text-align:center; padding:2rem 1rem 1rem;
-    font-size:0.65rem; color:#b0bec5; line-height:1.8;
+    text-align:center; padding:1.5rem 1rem;
+    font-size:0.62rem; color:#b0bec5;
   }
-  .footer .heart { color:#ef5350; animation: pulse 1.5s infinite; display:inline-block; }
-  @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.2)} }
+  .footer .h { color:#ef5350; display:inline-block; animation: hp 1.5s infinite; }
+  @keyframes hp { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
 
   .sk { animation:sk 1.2s infinite; background:#e8edf2; border-radius:6px; height:1rem; margin-bottom:0.8rem; }
   @keyframes sk { 0%{opacity:.3} 50%{opacity:.6} 100%{opacity:.3} }
 
   @media(max-width:480px) {
-    .header { padding:1.8rem 1rem 1.5rem; }
+    .header { padding:1.6rem 1rem 1.4rem; }
     .rank-card { padding:0.65rem 0.75rem; }
-    .rank-card .rank-desc { padding-left:2.2rem; }
-    .tip-card { padding:0.7rem 0.75rem; }
-    .bgm-card { padding:0.55rem 0.75rem; }
+    .tip-card { padding:0.8rem 0.8rem; }
+    .wb-card { padding:0.65rem 0.75rem; }
   }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <div class="header-deco" style="top:8%;left:5%;">✨</div>
-  <div class="header-deco" style="top:15%;right:12%;animation-delay:1s;">🩵</div>
-  <div class="header-deco" style="bottom:20%;left:8%;animation-delay:2s;">🌟</div>
-  <div class="header-deco" style="bottom:25%;right:6%;animation-delay:3s;font-size:2rem;">💠</div>
-  <div class="mascot">🩵</div>
-  <h1>📰 每日传媒简讯 · <span class="rem-icon">雷姆</span></h1>
-  <div class="subtitle">编导 · 运营 · 内容创作者的一天从这里开始 🩵</div>
+  <h1>📰 每日传媒简讯 · <span class="rem">雷姆</span></h1>
+  <div class="sub">编导 · 运营 · 热点 🩵</div>
 </div>
 
 <div class="date-nav">
   <div>
-    <div class="current-date" id="currentDate">2026年5月24日 · 星期日</div>
-    <div class="sub" id="weekTag">第21周</div>
+    <div class="d" id="currentDate">2026年5月24日 · 星期日</div>
+    <div class="w" id="weekTag">第21周</div>
   </div>
   <div class="arrows">
     <button id="prevBtn">‹</button>
@@ -259,7 +228,6 @@
     <div class="sk" style="width:30%"></div>
     <div class="sk"></div>
     <div class="sk" style="width:55%"></div>
-    <div class="sk"></div>
   </div>
 
   <div class="archive-box">
@@ -268,15 +236,9 @@
   </div>
 </div>
 
-<div class="footer">
-  <span class="heart">🩵</span> 雷姆 · 主人今天也要加油呀 <span class="heart">🩵</span><br>
-  <span style="opacity:0.4;">每天早晨 9:00 更新</span>
-</div>
+<div class="footer"><span class="h">🩵</span> 雷姆 · 主人今天也要加油呀</div>
 
 <script>
-// ================================================================
-// 数据区 · 每天早上由雷姆更新
-// ================================================================
 const briefings = {
   "2026-05-24": {
     date: "2026年5月24日 · 星期日",
@@ -293,47 +255,31 @@ const briefings = {
       { rank: 9, title: "徐留平被查", hot: "792万", url: "https://www.douyin.com/search/%E5%BE%90%E7%95%99%E5%B9%B3%E8%A2%AB%E6%9F%A5" },
       { rank: 10, title: "神23乘组公布", hot: "781万", url: "https://www.douyin.com/search/%E7%A5%9E23%E4%B9%98%E7%BB%84%E5%85%AC%E5%B8%83" }
     ],
-    xiaohongshu: [
-      { rank: 1, title: "（API暂不支持小红书，明日接入）", hot: "——", url: "https://www.xiaohongshu.com" }
-    ],
     weibo: [
       { rank: 1, title: "留神峪煤矿事故82人遇难", hot: "111.8万", url: "https://s.weibo.com/weibo?q=%E7%95%99%E7%A5%9E%E5%B3%AA%E7%85%A4%E7%9F%BF%E4%BA%8B%E6%95%8582%E4%BA%BA%E9%81%87%E9%9A%BE", desc: "社会热点，关注度高。适合做信息整合类内容，注意尊重事实避免消费灾难" },
       { rank: 2, title: "香港航天员黎家盈", hot: "78.9万", url: "https://s.weibo.com/weibo?q=%E9%A6%99%E6%B8%AF%E8%88%AA%E5%A4%A9%E5%91%98%E9%BB%8E%E5%AE%B6%E7%9B%88", desc: "首位香港女航天员，正能量内容，适合做科普/人物类短视频" },
       { rank: 3, title: "中国硬核实力又刷屏了", hot: "66.3万", url: "https://s.weibo.com/weibo?q=%E4%B8%AD%E5%9B%BD%E7%A1%AC%E6%A0%B8%E5%AE%9E%E5%8A%9B%E5%8F%88%E5%88%B7%E5%B1%8F%E4%BA%86", desc: "综合性热点，适合做剪辑混剪类内容" },
       { rank: 4, title: "李登科声援沈月", hot: "45.4万", url: "https://s.weibo.com/weibo?q=%E6%9D%8E%E7%99%BB%E7%A7%91%E5%A3%B0%E6%8F%B4%E6%B2%88%E6%9C%88", desc: "娱乐热点，适合做追星/娱乐八卦类内容" },
-      { rank: 5, title: "在泳池游泳一定要学会踩水", hot: "32.5万", url: "https://s.weibo.com/weibo?q=%E5%9C%A8%E6%B3%B3%E6%B1%A0%E6%B8%B3%E6%B3%B3%E4%B8%80%E5%AE%9A%E8%A6%81%E5%AD%A6%E4%BC%9A%E8%B8%A9%E6%B0%B4", desc: "夏日安全话题，适合做科普/生活技巧类内容" },
+      { rank: 5, title: "在泳池游泳一定要学会踩水", hot: "32.5万", url: "https://s.weibo.com/weibo?q=%E5%9C%A8%E6%B3%B3%E6%B1%A0%E6%B8%B8%E6%B3%B3%E4%B8%80%E5%AE%9A%E8%A6%81%E5%AD%A6%E4%BC%9A%E8%B8%A9%E6%B0%B4", desc: "夏日安全话题，适合做科普/生活技巧类内容" },
       { rank: 6, title: "留神峪煤矿有重大违法行为", hot: "30.3万", url: "https://s.weibo.com/weibo?q=%E7%95%99%E7%A5%9E%E5%B3%AA%E7%85%A4%E7%9F%BF%E6%9C%89%E9%87%8D%E5%A4%A7%E8%BF%9D%E6%B3%95%E8%A1%8C%E4%B8%BA", desc: "社会事件跟进，注意把握内容尺度" },
       { rank: 7, title: "孙怡看到曾沛慈票数的表情", hot: "29.8万", url: "https://s.weibo.com/weibo?q=%E5%AD%99%E6%80%A1%E7%9C%8B%E5%88%B0%E6%9B%BE%E6%B2%9B%E6%85%88%E7%A5%A8%E6%95%B0%E7%9A%84%E8%A1%A8%E6%83%85", desc: "综艺话题，适合做娱乐向/表情包类内容" },
       { rank: 8, title: "不许再霸凌自己了", hot: "24.4万", url: "https://s.weibo.com/weibo?q=%E4%B8%8D%E8%AE%B8%E5%86%8D%E9%9C%B8%E5%87%8C%E8%87%AA%E5%B7%B1%E4%BA%86", desc: "情感共鸣类话题，适合做心理/治愈向内容" }
     ],
     tips: [
-      { tag: "航天", tagClass: "tt-gen", title: "🚀 神舟二十三号发射热点怎么蹭", body: "①航天题材科普向解读 ②'如果航天员来昆明吃什么'本地化创意 ③神舟发射倒计时系列 ④航天主题探店/餐饮跨界 ⑤用航天视角拍本地vlog（创意转场）", url: "https://www.douyin.com/search/%E7%A5%9E%E8%88%9F" },
-      { tag: "本地", tagClass: "tt-local", title: "📍 香港航天员黎家盈是昆明人的话题切入点", body: "①航天员老家美食/文化介绍 ②'如果黎家盈回云南想吃啥'趣味内容 ③云南籍名人系列内容 ④航天员训练日常科普 ⑤航天精神+本地故事结合", url: "https://s.weibo.com/weibo?q=%E9%A6%99%E6%B8%AF%E8%88%AA%E5%A4%A9%E5%91%98%E9%BB%8E%E5%AE%B6%E7%9B%88" },
-      { tag: "情感", tagClass: "tt-mkt", title: "💗 '不许再霸凌自己了'——自我关怀类内容持续热度", body: "①结合餐饮场景：'一个人吃饭也很幸福' ②治愈系vlog+美食 ③自我对话类口播内容 ④'对自己好一点'系列推荐 ⑤适合搭配温暖BGM和慢节奏剪辑", url: "https://s.weibo.com/weibo?q=%E4%B8%8D%E8%AE%B8%E5%86%8D%E9%9C%B8%E5%87%8C%E8%87%AA%E5%B7%B1%E4%BA%86" },
-      { tag: "创作", tagClass: "tt-gen", title: "🎬 '中国硬核实力又刷屏了'——混剪类内容窗口", body: "①收集航天/科技素材做混剪 ②配热血BGM ③结合本地元素（如云南科技成就） ④15秒卡点视频 ⑤评论区引导讨论'你最骄傲的中国瞬间'", url: "https://s.weibo.com/weibo?q=%E4%B8%AD%E5%9B%BD%E7%A1%AC%E6%A0%B8%E5%AE%9E%E5%8A%9B%E5%8F%88%E5%88%B7%E5%B1%8F%E4%BA%86" },
-      { tag: "生活", tagClass: "tt-food", title: "🏊 游泳踩水热点——夏日安全类内容怎么做", body: "①'夏天必学的保命技能'系列 ②结合本地游泳馆/水上乐园探店 ③救生员/教练的一天vlog ④夏日防溺水科普动画 ⑤亲子游泳内容方向", url: "https://s.weibo.com/weibo?q=%E5%9C%A8%E6%B3%B3%E6%B1%A0%E6%B8%B8%E6%B3%B3%E4%B8%80%E5%AE%9A%E8%A6%81%E5%AD%A6%E4%BC%9A%E8%B8%A9%E6%B0%B4" }
-    ],
-    bgm: [
-      { name: "起风了 (2026版)", artist: "买辣椒也用券", tag: "情感", url: "https://www.douyin.com/music/%E8%B5%B7%E9%A3%8E%E4%BA%86" },
-      { name: "China-Rain", artist: "徐梦圆", tag: "氛围感", url: "https://www.douyin.com/music/china-rain" },
-      { name: "New Boy", artist: "房东的猫", tag: "治愈", url: "https://www.douyin.com/music/new-boy" },
-      { name: "星河万里", artist: "叶里", tag: "Vlog", url: "https://www.douyin.com/music/%E6%98%9F%E6%B2%B3%E4%B8%87%E9%87%8C" },
-      { name: "云南 (方言版)", artist: "本地音乐人", tag: "本地", url: "https://www.douyin.com/music/%E4%BA%91%E5%8D%97" }
-    ],
-    news: [
-      { title: "神舟二十三号计划近日择机发射", url: "https://www.douyin.com/search/%E7%A5%9E%E8%88%9F%E4%BA%8C%E5%8D%81%E4%B8%89%E5%8F%B7", desc: "航天题材近期热门，适合科普/本地化创意内容" },
-      { title: "国务院推行常住地提供基本公共服务", url: "https://www.douyin.com/search/%E5%9B%BD%E5%8A%A1%E9%99%A2%E6%8E%A8%E8%A1%8C%E5%B8%B8%E4%BD%8F%E5%9C%B0%E6%8F%90%E4%BE%9B%E5%9F%BA%E6%9C%AC%E5%85%AC%E5%85%B1%E6%9C%8D%E5%8A%A1", desc: "政策类新闻，适合做政策解读类内容" }
-    ],
-    local: [
-      { title: "呈贡今日天气：多云转晴 19~27℃", url: "https://www.weather.com.cn/weather/530121.shtml", desc: "" },
-      { title: "昆明周末或有降雨，出门记得带伞", url: "https://www.weather.com.cn/weather/530121.shtml", desc: "" }
+      { tag: "航天", tc: "tt-hot", title: "🚀 神舟二十三号发射热点怎么蹭", url: "https://www.douyin.com/search/%E7%A5%9E%E8%88%9F",
+        body: "① <b>航天题材科普向</b> — 神舟二十三号 vs 神舟系列升级点，做成图解/动画形式\n② <b>本地化创意</b> — "如果航天员来昆明，我会带ta去吃啥"系列，融入本地美食\n③ <b>倒计时系列</b> — 每天一条发射倒计时内容，搭配热血BGM，最后一天剪合集\n④ <b>跨界联动</b> — 餐饮店推出"航天套餐"、宇航员主题装修，蹭热度顺便卖货\n⑤ <b>创意转场</b> — 用航天发射画面转场到本地场景，视觉冲击力强" },
+      { tag: "本地", tc: "tt-local", title: "📍 香港航天员黎家盈 — 云南人的自豪感从哪切入", url: "https://s.weibo.com/weibo?q=%E9%A6%99%E6%B8%AF%E8%88%AA%E5%A4%A9%E5%91%98%E9%BB%8E%E5%AE%B6%E7%9B%88",
+        body: "① <b>人物故事类</b> — 黎家盈的成长经历、训练日常，做成人物纪实短视频（参考《中国人的一天》风格）\n② <b>本地关联</b> — 黎家盈和云南的关系、家乡人民的反应，做情感向内容\n③ <b>航天员日常科普</b> — "航天员在太空怎么吃饭/睡觉/工作"系列，抖音上这类内容流量稳定\n④ <b>正能量混剪</b> — 中国航天发展史混剪，配《星辰大海》类BGM" },
+      { tag: "情感", tc: "tt-em", title: "💗 "不许再霸凌自己了"——自我关怀类内容怎么做", url: "https://s.weibo.com/weibo?q=%E4%B8%8D%E8%AE%B8%E5%86%8D%E9%9C%B8%E5%87%8C%E8%87%AA%E5%B7%B1%E4%BA%86",
+        body: "① <b>餐饮结合</b> — "一个人吃饭也可以很幸福"系列，拍独食vlog，搭配温暖旁白\n② <b>治愈系vlog</b> — 慢节奏生活日常：买菜、做饭、听歌、发呆，重点在氛围感\n③ <b>口播类</b> — 以第一人称讲述"对自己好一点"的故事，真实经历最有共鸣\n④ <b>BGM推荐</b> — 搭配温暖钢琴曲或轻哼类音乐，不要用太激昂的配乐" },
+      { tag: "创作", tc: "tt-gen", title: "🎬 "中国硬核实力又刷屏了"——混剪类内容这么做", url: "https://s.weibo.com/weibo?q=%E4%B8%AD%E5%9B%BD%E7%A1%AC%E6%A0%B8%E5%AE%9E%E5%8A%9B%E5%8F%88%E5%88%B7%E5%B1%8F%E4%BA%86",
+        body: "① <b>素材收集</b> — 航天发射、高铁、基建等画面混剪，15秒卡点节奏最优\n② <b>本地结合</b> — 云南本地的"硬核实力"（如水电工程、天文台），增加独特性\n③ <b>互动引导</b> — 评论区问"你最骄傲的中国瞬间是什么？"，引导讨论提升互动率\n④ <b>系列化</b> — 做成"中国骄傲"系列，每期一个主题，固定片头片尾形成品牌" },
+      { tag: "生活", tc: "tt-life", title: "🏊 游泳踩水热点——夏日安全类内容的正确姿势", url: "https://s.weibo.com/weibo?q=%E5%9C%A8%E6%B3%B3%E6%B1%A0%E6%B8%B8%E6%B3%B3%E4%B8%80%E5%AE%9A%E8%A6%81%E5%AD%A6%E4%BC%9A%E8%B8%A9%E6%B0%B4",
+        body: "① <b>实用科普</b> — "夏天必学的5个保命技能"，制作图文+动图教程\n② <b>本地探店</b> — 昆明游泳馆/水上乐园探店，暑期流量大\n③ <b>职业体验</b> — 救生员的一天vlog，职业体验类内容容易上热门\n④ <b>亲子方向</b> — 家长教孩子游泳/踩水的温馨记录，妈妈圈层精准触达" }
     ]
   }
 };
 
-// ================================================================
-// 渲染引擎
-// ================================================================
 const dates = Object.keys(briefings).sort().reverse();
 let cur = 0;
 const today = dates[0];
@@ -343,92 +289,39 @@ function rn(n) { if (n<=3) return 'r'+n; return 'rn'; }
 function render(ds) {
   const d = briefings[ds];
   if (!d) return;
-
   let html = `<div class="briefing active">`;
 
   // 抖音热榜
-  html += `<div class="sec"><div class="sec-head"><span class="emoji">📱</span> 抖音热榜 Top 10</div>`;
+  html += `<div class="sec"><div class="sec-head">📱 抖音热榜 Top 10</div>`;
   d.douyin.forEach(item => {
     html += `<div class="rank-card" onclick="window.open('${item.url}','_blank')">
-      <div class="rank-top">
-        <div class="rank-num ${rn(item.rank)}">${item.rank}</div>
-        <div class="rank-title">${item.title}</div>
-        <div class="rank-hot">🔥 ${item.hot}</div>
-      </div>
-    </div>`;
-  });
-  html += `</div>`;
-
-  // 小红书热榜
-  html += `<div class="sec"><div class="sec-head"><span class="emoji">📕</span> 小红书热榜 Top 10</div>`;
-  d.xiaohongshu.forEach(item => {
-    html += `<div class="rank-card" onclick="window.open('${item.url}','_blank')">
-      <div class="rank-top">
-        <div class="rank-num ${rn(item.rank)}">${item.rank}</div>
-        <div class="rank-title">${item.title}</div>
-        <div class="rank-hot">❤️ ${item.hot}</div>
-      </div>
-    </div>`;
+      <div class="top"><div class="num ${rn(item.rank)}">${item.rank}</div>
+      <div class="title">${item.title}</div><div class="hot">🔥 ${item.hot}</div></div></div>`;
   });
   html += `</div>`;
 
   // 微博热搜
-  html += `<div class="sec"><div class="sec-head"><span class="emoji">🔥</span> 微博热搜精选</div>`;
+  html += `<div class="sec"><div class="sec-head">🔥 微博热搜</div>`;
   d.weibo.forEach(item => {
-    html += `<div class="rank-card" onclick="window.open('${item.url}','_blank')">
-      <div class="rank-top">
-        <div class="rank-title">${item.title}</div>
-        <div class="rank-hot">${item.hot}</div>
+    html += `<div class="wb-card" onclick="window.open('${item.url}','_blank')">
+      <div class="wb-top">
+        <div class="wb-rank">#${item.rank}</div>
+        <div class="wb-title">${item.title}</div>
+        <div class="wb-hot">${item.hot}</div>
       </div>
-      <div class="rank-desc">${item.desc}</div>
-    </div>`;
+      <div class="wb-desc">${item.desc}</div></div>`;
   });
   html += `</div>`;
 
-  // 蹭热点参考（5条）
-  html += `<div class="sec"><div class="sec-head"><span class="emoji">🎯</span> 蹭热点参考</div>`;
+  // 蹭热点参考
+  html += `<div class="sec"><div class="sec-head">🎯 蹭热点参考 · 详细版</div>`;
   d.tips.forEach(item => {
     html += `<div class="tip-card" onclick="window.open('${item.url}','_blank')">
-      <div class="tip-header">
-        <span class="tip-tag ${item.tagClass}">${item.tag}</span>
+      <div class="tip-head">
+        <span class="tip-tag ${item.tc}">${item.tag}</span>
         <div class="tip-title">${item.title}</div>
       </div>
-      <div class="tip-body">${item.body}</div>
-    </div>`;
-  });
-  html += `</div>`;
-
-  // BGM
-  html += `<div class="sec"><div class="sec-head"><span class="emoji">🎵</span> 今日热门 BGM</div>`;
-  d.bgm.forEach((item, i) => {
-    html += `<div class="bgm-card" onclick="window.open('${item.url}','_blank')">
-      <div class="bgm-num">${String(i+1).padStart(2,'0')}</div>
-      <div class="bgm-info">
-        <div class="bgm-name">${item.name}</div>
-        <div class="bgm-artist">${item.artist}</div>
-      </div>
-      <div class="bgm-tag">${item.tag}</div>
-    </div>`;
-  });
-  html += `</div>`;
-
-  // 行业动态
-  html += `<div class="sec"><div class="sec-head"><span class="emoji">📰</span> 行业动态</div>`;
-  d.news.forEach(item => {
-    html += `<div class="news-card" onclick="window.open('${item.url}','_blank')">
-      <div class="nc-title">${item.title}</div>
-      ${item.desc ? `<div class="nc-desc">${item.desc}</div>` : ''}
-    </div>`;
-  });
-  html += `</div>`;
-
-  // 本地
-  html += `<div class="sec"><div class="sec-head"><span class="emoji">📍</span> 昆明 · 本地</div>`;
-  d.local.forEach(item => {
-    html += `<div class="news-card" onclick="window.open('${item.url}','_blank')">
-      <div class="nc-title">${item.title}</div>
-      ${item.desc ? `<div class="nc-desc">${item.desc}</div>` : ''}
-    </div>`;
+      <div class="tip-body">${item.body}</div></div>`;
   });
   html += `</div>`;
 
@@ -440,10 +333,7 @@ function render(ds) {
   dates.forEach(dd => {
     const b = briefings[dd];
     const act = dd === ds;
-    arch += `<div class="day" onclick="go('${dd}')">
-      <span>${act ? '👉 ' : ''}${b ? b.date : dd}</span>
-      <span class="wk">${b ? b.week : ''}</span>
-    </div>`;
+    arch += `<div class="day" onclick="go('${dd}')"><span>${act ? '👉 ' : ''}${b ? b.date : dd}</span><span class="wk">${b ? b.week : ''}</span></div>`;
   });
   document.getElementById('archiveDays').innerHTML = arch;
   document.getElementById('currentDate').textContent = d.date;
