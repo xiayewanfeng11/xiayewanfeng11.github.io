@@ -19,6 +19,24 @@ body{font-family:'Microsoft YaHei','PingFang SC',sans-serif;background:#f0f4fa;c
 .ct{max-width:800px;margin:0 auto;padding:0 1rem 2rem}
 .bf{display:none}.bf.active{display:block}
 .sec{margin-top:1.2rem;background:rgba(255,255,255,.7);border-radius:14px;padding:0.8rem 0.9rem 0.6rem;border:1px solid rgba(126,200,227,.08)}
+.sec-douyin{background:rgba(126,200,227,.1)}
+.sec-weibo{background:rgba(255,183,77,.08)}
+.sec-bili{background:rgba(171,71,188,.06)}
+.sec-zhihu{background:rgba(38,166,154,.06)}
+.sec-viral{background:rgba(255,154,162,.08)}
+.sec-ideas{background:rgba(126,200,227,.06)}
+.sec-topics{background:rgba(212,175,55,.08)}
+.sec-tips{background:rgba(200,180,220,.08)}
+
+.sec-douyin{background:rgba(126,200,227,.1)}
+.sec-weibo{background:rgba(255,183,77,.08)}
+.sec-bili{background:rgba(171,71,188,.06)}
+.sec-zhihu{background:rgba(38,166,154,.06)}
+.sec-viral{background:rgba(255,154,162,.08)}
+.sec-ideas{background:rgba(126,200,227,.06)}
+.sec-topics{background:rgba(212,175,55,.08)}
+.sec-tips{background:rgba(200,180,220,.08)}
+
 .sec:first-child{margin-top:0}
 .sh{font-size:clamp(0.75rem,1.05vw,0.85rem);font-weight:700;color:#2c3e6b;padding-bottom:0.35rem;margin-bottom:0.4rem;border-bottom:2px solid rgba(126,200,227,.15);display:flex;align-items:center;gap:0.3rem}
 .sh .snb{background:#7ec8e3;color:#fff;font-size:0.5rem;border-radius:6px;padding:0.08rem 0.5rem;font-weight:600}
@@ -70,20 +88,20 @@ function rn(n){return n<=3?'n'+n:'nn'}
 function tg(i){return['t1','t2','t3','t4','t5'][i%5]}
 function r(ds){var d=B[ds];if(!d)return;
 var h='<div class="bf active">';
-h+='<div class="sec"><div class="sh"><span class="ico">📱</span> 抖音热榜 Top 10 <span class="rem">🩵雷姆看热点</span></div>';
+h+='<div class="sec sec-douyin"><div class="sh"><span class="ico">📱</span> 抖音热榜 Top 10 <span class="rem">🩵雷姆看热点</span></div>';
 d.douyin.forEach(function(i){h+='<div class="rk" onclick="window.open(\''+i.url+'\',\'_blank\')"><div class="rn '+rn(i.rank)+'">'+i.rank+'</div><div class="rt">'+i.title+'</div><div class="rh">'+i.hot+'</div></div>'});
-h+='</div><div class="sec"><div class="sh">微博热搜</div>';
+h+='</div><div class="sec sec-weibo"><div class="sh">微博热搜</div>';
 d.weibo.forEach(function(i){h+='<div class="rk" onclick="window.open(\''+i.url+'\',\'_blank\')"><div class="rn '+rn(i.rank)+'">'+i.rank+'</div><div class="rt">'+i.title+'</div><div class="rh">'+i.hot+'</div></div>'});
-h+='</div><div class="sec"><div class="sh">B站热榜 Top 10</div>';
+h+='</div><div class="sec sec-bili"><div class="sh">B站热榜 Top 10</div>';
 d.bili.forEach(function(i){h+='<div class="rk" onclick="window.open(\''+i.url+'\',\'_blank\')"><div class="rn '+rn(i.rank)+'">'+i.rank+'</div><div class="rt">'+i.title+'</div></div>'});
-h+='</div><div class="sec"><div class="sh">知乎热榜</div>';
+h+='</div><div class="sec sec-zhihu"><div class="sh">知乎热榜</div>';
 d.zhihu.forEach(function(i){h+='<div class="rk" onclick="window.open(\''+i.url+'\',\'_blank\')"><div class="rn '+rn(i.rank)+'">'+i.rank+'</div><div class="rt">'+i.title+'</div><div class="rh">'+i.hot+'</div></div>'});
-h+='</div><div class="sec"><div class="sh">爆款分析 <span class="snb">雷姆分析</span></div><div class="vc"><div class="vct"><span class="vctg">'+d.viral.tag+'</span>'+d.viral.title+'</div><div class="vcm">'+d.viral.data+'</div><div class="vcl">火的原因</div><div class="vcb">'+d.viral.why+'</div><div class="vcl">普通人能学什么</div><div class="vcb">'+d.viral.learn+'</div></div></div>';
-h+='<div class="sec"><div class="sh">选题灵感 <span class="snb">雷姆提供</span></div>';
+h+='</div><div class="sec sec-viral"><div class="sh">爆款分析 <span class="snb">雷姆分析</span></div><div class="vc"><div class="vct"><span class="vctg">'+d.viral.tag+'</span>'+d.viral.title+'</div><div class="vcm">'+d.viral.data+'</div><div class="vcl">火的原因</div><div class="vcb">'+d.viral.why+'</div><div class="vcl">普通人能学什么</div><div class="vcb">'+d.viral.learn+'</div></div></div>';
+h+='<div class="sec sec-ideas"><div class="sh">选题灵感 <span class="snb">雷姆提供</span></div>';
 d.ideas.forEach(function(i){h+='<div class="id"><div class="idh"><div class="idn">'+i.num+'</div><div class="idt">'+i.title+'</div></div><div class="idb">'+i.body+'</div></div>'});
-h+='</div><div class="sec"><div class="sh">选题推荐 <span class="snb">雷姆分析</span></div>';
+h+='</div><div class="sec sec-topics"><div class="sh">选题推荐 <span class="snb">雷姆分析</span></div>';
 d.topics.forEach(function(i,x){h+='<div class="tp"><div class="tph"><span class="tptg '+tg(x)+'">'+i.tag+'</span><div class="tpti">'+i.title+'</div></div><div class="tpf">'+i.from+'</div><div class="tpl">分析</div><div class="tpb">'+i.analysis+'</div><div class="tpl">人群</div><div class="tpb">'+i.audience+'</div><div class="tpl">切入方向</div><div class="tpb">'+i.angle+'</div><div class="tpn">'+i.note+'</div></div>'});
-h+='</div><div class="sec"><div class="sh">蹭热点参考</div>';
+h+='</div><div class="sec sec-tips"><div class="sh">蹭热点参考</div>';
 d.tips.forEach(function(i,x){h+='<div class="tp"><div class="tph"><span class="tptg '+tg(x)+'">'+i.tag+'</span><div class="tpti">'+i.title+'</div></div><div class="tpb">'+i.body+'</div></div>'});
 h+='</div></div>';
 document.getElementById('bc').innerHTML=h;
