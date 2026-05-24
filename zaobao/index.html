@@ -320,14 +320,6 @@ const briefings = {
       { num: 3, title: "【挑战类】用同一种运镜拍遍昆明",
         body: "模仿抖音上火的运镜挑战，但加入本地元素——同一个运镜方式拍翠湖、斗南花市、老街、滇池。连续更新形成系列，涨粉效果比单条视频好很多。" }
     ],
-    // ===== 涨粉榜（手动整理）=====
-    fans: [
-      { rank: 1, name: "昆明小陈（美食探店）", tag: "美食", num: "+12.3万", url: "https://www.douyin.com" },
-      { rank: 2, name: "云南阿霞（本地生活）", tag: "本地", num: "+9.8万", url: "https://www.douyin.com" },
-      { rank: 3, name: "剪辑师老张（教程）", tag: "教程", num: "+8.5万", url: "https://www.douyin.com" },
-      { rank: 4, name: "昆明动物园（萌宠）", tag: "萌宠", num: "+7.2万", url: "https://www.douyin.com" },
-      { rank: 5, name: "呈贡大学城（校园）", tag: "校园", num: "+6.1万", url: "https://www.douyin.com" }
-    ],
     // ===== 蹭热点参考（手动整理）=====
     tips: [
       { tag: "航天", tc: "tt1", title: "🚀 神舟二十三号发射热点怎么蹭",
@@ -379,13 +371,6 @@ function render(ds) {
   html += '<div class="sec"><div class="sec-head">💡 今日选题灵感</div>';
   d.ideas.forEach(i => {
     html += '<div class="idea"><div class="idea-h"><div class="idea-n">' + i.num + '</div><div class="idea-t">' + i.title + '</div></div><div class="idea-b">' + i.body + '</div></div>';
-  });
-  html += '</div>';
-
-  // 涨粉榜
-  html += '<div class="sec"><div class="sec-head">📈 涨粉榜 Top 5</div>';
-  d.fans.forEach(i => {
-    html += '<div class="fans" onclick="window.open(\'' + i.url + '\',\'_blank\')"><div class="f-n">#' + i.rank + '</div><div class="f-name">' + i.name + '</div><div class="f-tag">' + i.tag + '</div><div class="f-num">' + i.num + '</div></div>';
   });
   html += '</div>';
 
