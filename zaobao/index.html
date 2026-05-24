@@ -81,7 +81,7 @@ d.zhihu.forEach(function(i){h+='<div class="rk" onclick="window.open(\''+i.url+'
 h+='</div><div class="sec"><div class="sh">爆款分析 <span class="snb">雷姆分析</span></div><div class="vc"><div class="vct"><span class="vctg">'+d.viral.tag+'</span>'+d.viral.title+'</div><div class="vcm">'+d.viral.data+'</div><div class="vcl">火的原因</div><div class="vcb">'+d.viral.why+'</div><div class="vcl">普通人能学什么</div><div class="vcb">'+d.viral.learn+'</div></div></div>';
 h+='<div class="sec"><div class="sh">选题灵感 <span class="snb">雷姆提供</span></div>';
 d.ideas.forEach(function(i){h+='<div class="id"><div class="idh"><div class="idn">'+i.num+'</div><div class="idt">'+i.title+'</div></div><div class="idb">'+i.body+'</div></div>'});
-h+='</div><div class="sec"><div class="sh">跨平台选题推荐 <span class="snb">雷姆分析</span></div>';
+h+='</div><div class="sec"><div class="sh">选题推荐 <span class="snb">雷姆分析</span></div>';
 d.topics.forEach(function(i,x){h+='<div class="tp"><div class="tph"><span class="tptg '+tg(x)+'">'+i.tag+'</span><div class="tpti">'+i.title+'</div></div><div class="tpf">'+i.from+'</div><div class="tpl">分析</div><div class="tpb">'+i.analysis+'</div><div class="tpl">人群</div><div class="tpb">'+i.audience+'</div><div class="tpl">切入方向</div><div class="tpb">'+i.angle+'</div><div class="tpn">'+i.note+'</div></div>'});
 h+='</div><div class="sec"><div class="sh">蹭热点参考</div>';
 d.tips.forEach(function(i,x){h+='<div class="tp"><div class="tph"><span class="tptg '+tg(x)+'">'+i.tag+'</span><div class="tpti">'+i.title+'</div></div><div class="tpb">'+i.body+'</div></div>'});
