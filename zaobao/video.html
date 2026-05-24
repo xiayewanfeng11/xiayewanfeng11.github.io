@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>忠于热爱 · 雷姆</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&display=swap');
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background:#0f0f1a;
+  display:flex; justify-content:center; align-items:center;
+  min-height:100vh;
+  font-family:'Noto Serif SC','Microsoft YaHei',serif;
+}
+
+.stage {
+  width:1280px; height:720px;
+  position:relative; overflow:hidden;
+  background:linear-gradient(135deg, #0a0a1a 0%, #1a1a35 30%, #2a1a35 60%, #1a1a2e 100%);
+  border-radius:8px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+
+/* 背景装饰 */
+.stage::before {
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(100,150,255,.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 70%, rgba(200,100,255,.04) 0%, transparent 50%);
+  pointer-events:none;
+}
+
+/* 粒子 */
+.particle {
+  position:absolute; border-radius:50%;
+  pointer-events:none;
+  animation: floatUp 8s infinite ease-in-out;
+}
+@keyframes floatUp {
+  0%,100% { transform:translateY(0) scale(1); opacity:0; }
+  20% { opacity:.3; }
+  80% { opacity:.3; }
+  100% { transform:translateY(-60px) scale(.5); opacity:0; }
+}
+
+/* ===== 场景 ===== */
+.scene {
+  position:absolute; inset:0;
+  display:flex; flex-direction:column; justify-content:center; align-items:center;
+  padding:60px 80px;
+  opacity:0;
+  transition: opacity 1s ease;
+}
+.scene.active { opacity:1; z-index:10; }
+.scene.exit { opacity:0; z-index:5; }
+
+.scene .label {
+  position:absolute; top:40px; left:60px;
+  font-size:14px; color:rgba(255,255,255,.2);
+  letter-spacing:4px; font-family:sans-serif;
+}
+
+.scene .progress {
+  position:absolute; bottom:40px; left:60px; right:60px;
+  height:2px; background:rgba(255,255,255,.06); border-radius:2px;
+}
+.scene .progress .bar {
+  height:100%; background:linear-gradient(90deg,#7ec8e3,#a78bfa);
+  border-radius:2px; width:0%;
+  transition: width .3s linear;
+}
+
+/* ===== 文字动画 ===== */
+.line {
+  opacity:0; transform:translateY(20px);
+  transition: all .8s cubic-bezier(.22,1,.36,1);
+  width:100%;
+}
+.line.show { opacity:1; transform:translateY(0); }
+
+.line.title {
+  font-size:clamp(36px, 4vw, 52px);
+  font-weight:900; color:#f0ece3;
+  line-height:1.4; text-align:center;
+  letter-spacing:2px;
+}
+.line.em {
+  font-size:clamp(42px, 5vw, 60px);
+  font-weight:900; color:#7ec8e3;
+  text-align:center;
+  margin:8px 0;
+  text-shadow:0 0 30px rgba(126,200,227,.15);
+}
+.line.body {
+  font-size:clamp(18px, 2vw, 24px);
+  font-weight:400; color:rgba(240,236,227,.7);
+  line-height:2; text-align:center;
+  max-width:900px; margin:4px auto;
+}
+.line.sub {
+  font-size:clamp(14px, 1.4vw, 18px);
+  color:rgba(240,236,227,.35);
+  text-align:center; margin-top:12px;
+}
+
+/* ===== 结尾特别效果 ===== */
+.scene-final .line.em {
+  color:#a78bfa;
+  text-shadow:0 0 40px rgba(167,139,250,.2);
+}
+
+/* ===== 控制按钮 ===== */
+.controls {
+  position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
+  display:flex; gap:12px; z-index:100;
+}
+.controls button {
+  padding:8px 20px; border-radius:20px;
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(0,0,0,.4); color:rgba(255,255,255,.6);
+  font-size:13px; cursor:pointer; transition:all .15s;
+  backdrop-filter:blur(8px);
+}
+.controls button:hover { background:rgba(255,255,255,.1); color:#fff; }
+
+.tip {
+  position:fixed; bottom:70px; left:50%; transform:translateX(-50%);
+  font-size:12px; color:rgba(255,255,255,.2); z-index:100;
+  text-align:center;
+}
+</style>
+</head>
+<body>
+
+<div class="stage" id="stage">
+  <!-- 粒子背景 -->
+  <div id="particles"></div>
+
+  <!-- ===== 场景1：安稳 ===== -->
+  <div class="scene active" data-scene="0">
+    <div class="label">01 / 04</div>
+    <div class="line body show" style="margin-bottom:10px;">从前总盼着安稳</div>
+    <div class="line body show" style="transition-delay:.3s;">后来慢慢明白</div>
+    <div class="line em" style="transition-delay:.8s;margin-top:24px;">真正的安稳</div>
+    <div class="line body" style="transition-delay:1.5s;margin-top:6px;">从不是一成不变的铁饭碗</div>
+    <div class="line body" style="transition-delay:2s;">而是自己手里的底气</div>
+    <div class="line body" style="transition-delay:2.5s;color:rgba(126,200,227,.8);">眼里的星光、不停成长的自己</div>
+    <div class="progress"><div class="bar" id="bar0"></div></div>
+  </div>
+
+  <!-- ===== 场景2：创业 ===== -->
+  <div class="scene" data-scene="1">
+    <div class="label">02 / 04</div>
+    <div class="line em show" style="transition-delay:0s;">创业</div>
+    <div class="line body show" style="transition-delay:.2s;">不是一时兴起的冲动</div>
+    <div class="line body show" style="transition-delay:.7s;color:rgba(126,200,227,.6);">而是深思熟虑的选择</div>
+    <div style="width:60px;height:2px;background:rgba(126,200,227,.2);margin:16px 0;" class="show" style="transition-delay:1.2s;"></div>
+    <div class="line body" style="transition-delay:1.5s;">没有一蹴而就的成功</div>
+    <div class="line body" style="transition-delay:2s;">只有日积月累的沉淀</div>
+    <div class="line body" style="transition-delay:2.5s;color:rgba(240,236,227,.45);">我不再羡慕别人的捷径</div>
+    <div class="line body" style="transition-delay:3s;">只专注自己的脚步</div>
+    <div class="line body" style="transition-delay:3.5s;color:#7ec8e3;">慢慢深耕、慢慢发光</div>
+    <div class="progress"><div class="bar" id="bar1"></div></div>
+  </div>
+
+  <!-- ===== 场景3：坚持 ===== -->
+  <div class="scene" data-scene="2">
+    <div class="label">03 / 04</div>
+    <div class="line body show" style="transition-delay:0s;">路上会有迷茫</div>
+    <div class="line body show" style="transition-delay:.3s;color:rgba(240,236,227,.45);">会有疲惫</div>
+    <div class="line body show" style="transition-delay:.6s;">会有不被理解的时刻</div>
+    <div style="width:100px;height:2px;background:rgba(255,255,255,.08);margin:20px 0;" class="show" style="transition-delay:1.2s;"></div>
+    <div class="line em" style="transition-delay:1.5s;font-size:28px;">但每一次坚持</div>
+    <div class="line body" style="transition-delay:2.2s;">每一次突破</div>
+    <div class="line body" style="transition-delay:2.7s;">每一次不放弃</div>
+    <div class="line em" style="transition-delay:3.2s;margin-top:10px;">都是在为自己的人生铺路</div>
+    <div class="progress"><div class="bar" id="bar2"></div></div>
+  </div>
+
+  <!-- ===== 场景4：结尾 ===== -->
+  <div class="scene scene-final" data-scene="3">
+    <div class="label">04 / 04</div>
+    <div class="line em show" style="transition-delay:0s;font-size:48px;">忠于热爱</div>
+    <div class="line body show" style="transition-delay:.3s;font-size:20px;color:rgba(240,236,227,.5);">脚踏实地</div>
+    <div style="width:40px;height:2px;background:rgba(167,139,250,.3);margin:16px 0;" class="show" style="transition-delay:.8s;"></div>
+    <div class="line body" style="transition-delay:1.2s;">慢慢来</div>
+    <div class="line body" style="transition-delay:1.7s;color:rgba(167,139,250,.7);">所有的付出都会开花</div>
+    <div class="line em" style="transition-delay:2.3s;font-size:32px;">所有的坚持，终有回响</div>
+    <div class="line body" style="transition-delay:3s;margin-top:16px;font-size:16px;color:rgba(240,236,227,.3);">前路漫漫，未来可期</div>
+    <div class="line body" style="transition-delay:3.3s;font-size:18px;">全力以赴</div>
+    <div class="line em" style="transition-delay:3.8s;">做自己喜欢、值得坚持的事业</div>
+    <div class="line sub" style="transition-delay:4.5s;">🩵 雷姆</div>
+    <div class="progress"><div class="bar" id="bar3"></div></div>
+  </div>
+</div>
+
+<div class="tip">点击播放 · 全屏后录屏即可</div>
+<div class="controls">
+  <button onclick="playScene(0)">▶ 从头播放</button>
+  <button onclick="toggleAuto()">⏸ 暂停/继续</button>
+</div>
+
+<script>
+(function(){
+  // 粒子
+  var p = document.getElementById('particles');
+  for(var i=0;i<30;i++){
+    var d = document.createElement('div');
+    d.className = 'particle';
+    var s = Math.random()*3+1;
+    d.style.width=s+'px'; d.style.height=s+'px';
+    d.style.left=Math.random()*100+'%';
+    d.style.top=Math.random()*100+'%';
+    d.style.animationDelay=Math.random()*8+'s';
+    d.style.animationDuration=(Math.random()*4+6)+'s';
+    d.style.background='rgba(255,255,255,'+(Math.random()*.08+.02)+')';
+    p.appendChild(d);
+  }
+})();
+
+var currentScene = 0;
+var autoTimer = null;
+var sceneTimers = [];
+
+function showLines(sceneIdx) {
+  var scene = document.querySelectorAll('.scene')[sceneIdx];
+  var lines = scene.querySelectorAll('.line:not(.show)');
+  lines.forEach(function(l, i) {
+    var delay = parseFloat(l.style.transitionDelay) || (i * 0.15);
+    setTimeout(function() {
+      l.classList.add('show');
+    }, delay * 1000);
+  });
+  
+  // 进度条
+  var bar = document.getElementById('bar' + sceneIdx);
+  if (bar) {
+    var duration = 5000;
+    bar.style.transition = 'none';
+    bar.style.width = '0%';
+    setTimeout(function() {
+      bar.style.transition = 'width ' + duration + 'ms linear';
+      bar.style.width = '100%';
+    }, 100);
+  }
+}
+
+function playScene(idx) {
+  // 清理
+  sceneTimers.forEach(function(t) { clearTimeout(t); });
+  sceneTimers = [];
+  if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+
+  var scenes = document.querySelectorAll('.scene');
+  scenes.forEach(function(s, i) {
+    s.classList.remove('active', 'exit');
+    var lines = s.querySelectorAll('.line');
+    lines.forEach(function(l) { l.classList.remove('show'); });
+    var bar = document.getElementById('bar' + i);
+    if (bar) { bar.style.width = '0%'; bar.style.transition = 'none'; }
+  });
+
+  currentScene = idx;
+  
+  function activateScene(n) {
+    if (n >= scenes.length) { 
+      document.querySelector('.tip').textContent = '🩵 播放完成';
+      return; 
+    }
+    
+    var s = scenes[n];
+    s.classList.add('active');
+    showLines(n);
+    
+    // 5秒后切下一场
+    var t = setTimeout(function() {
+      s.classList.remove('active');
+      s.classList.add('exit');
+      activateScene(n + 1);
+    }, 5500);
+    sceneTimers.push(t);
+  }
+  
+  activateScene(idx);
+}
+
+function toggleAuto() {
+  if (autoTimer) {
+    clearInterval(autoTimer);
+    autoTimer = null;
+    document.querySelector('.tip').textContent = '⏸ 已暂停';
+  } else {
+    playScene(currentScene);
+    document.querySelector('.tip').textContent = '▶ 继续播放';
+  }
+}
+
+// 页面加载后自动播放
+window.onload = function() {
+  setTimeout(function() { playScene(0); }, 500);
+};
+</script>
+</body>
+</html>
