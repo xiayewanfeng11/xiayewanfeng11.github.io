@@ -3,159 +3,213 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>每日简讯 · 雷姆</title>
+<title>每日传媒简讯 · 雷姆</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
     font-family: 'Microsoft YaHei', 'PingFang SC', system-ui, sans-serif;
-    background:#f7f3ee; color:#2c2416;
+    background:#f5f0eb; color:#2c2416;
   }
 
+  /* ===== 顶部 ===== */
   .header {
     background:linear-gradient(135deg, #1a1a2e, #16213e);
     color:#f0ece3; text-align:center;
-    padding:2.5rem 1rem 1.8rem;
+    padding:2.2rem 1rem 1.6rem;
     position:relative; overflow:hidden;
   }
   .header::before {
     content:''; position:absolute; inset:0;
-    background:radial-gradient(circle at 20% 30%, rgba(192,57,43,.12) 0%, transparent 60%),
-               radial-gradient(circle at 80% 70%, rgba(184,134,11,.08) 0%, transparent 50%);
+    background:radial-gradient(circle at 20% 30%, rgba(192,57,43,.1) 0%, transparent 60%),
+               radial-gradient(circle at 80% 70%, rgba(184,134,11,.06) 0%, transparent 50%);
   }
-  .header h1 { font-size:clamp(1.4rem,2.8vw,2rem); font-weight:900; position:relative; z-index:1; }
-  .header p { font-size:clamp(0.75rem,1.1vw,0.9rem); color:rgba(240,236,227,.5); margin-top:0.4rem; position:relative; z-index:1; }
+  .header h1 { font-size:clamp(1.3rem,2.6vw,1.8rem); font-weight:900; position:relative; z-index:1; letter-spacing:1px; }
+  .header .subtitle { font-size:clamp(0.7rem,1vw,0.85rem); color:rgba(240,236,227,.45); margin-top:0.3rem; position:relative; z-index:1; }
 
+  /* ===== 日期导航 ===== */
   .date-nav {
-    max-width:800px; margin:0 auto; padding:1rem 1rem 0;
+    max-width:820px; margin:0 auto; padding:1rem 1rem 0;
     display:flex; align-items:center; justify-content:space-between;
   }
-  .date-nav .left {}
-  .date-nav .current-date { font-size:clamp(0.95rem,1.5vw,1.2rem); font-weight:700; color:#2c2416; }
-  .date-nav .sub { font-size:0.75rem; color:#bbb; margin-top:0.1rem; }
+  .date-nav .current-date { font-size:clamp(0.9rem,1.4vw,1.1rem); font-weight:700; color:#2c2416; }
+  .date-nav .sub { font-size:0.7rem; color:#bbb; margin-top:0.1rem; }
   .date-nav .arrows { display:flex; gap:0.4rem; }
   .date-nav .arrows button {
-    width:34px; height:34px; border-radius:50%; border:1px solid rgba(0,0,0,.08);
-    background:#fff; font-size:1rem; cursor:pointer;
-    transition:all .15s;
-    display:flex; align-items:center; justify-content:center; color:#555;
+    width:32px; height:32px; border-radius:50%; border:1px solid rgba(0,0,0,.08);
+    background:#fff; font-size:0.9rem; cursor:pointer; color:#555;
+    transition:all .15s; display:flex; align-items:center; justify-content:center;
   }
   .date-nav .arrows button:hover { border-color:#c0392b; color:#c0392b; }
   .date-nav .arrows button:disabled { opacity:0.25; cursor:default; }
 
-  .container { max-width:800px; margin:0 auto; padding:0 1rem 3rem; }
+  .container { max-width:820px; margin:0 auto; padding:0 1rem 3rem; }
 
-  .briefing { margin-top:0.5rem; display:none; }
+  .briefing { display:none; margin-top:0.3rem; }
   .briefing.active { display:block; }
 
-  .sec-title {
-    font-size:0.85rem; font-weight:700; color:#c0392b;
-    margin:1.2rem 0 0.6rem; padding-bottom:0.3rem;
-    border-bottom:1.5px solid rgba(192,57,43,.12);
-    display:flex; align-items:center; gap:0.4rem;
+  /* ===== 热榜专用 ===== */
+  .rank-card {
+    background:#fff; border-radius:14px; padding:1rem 1rem;
+    margin-bottom:0.7rem;
+    border:1px solid rgba(0,0,0,.04);
+    transition:all .15s; cursor:pointer;
   }
-  .sec-title .emoji { font-size:0.9rem; }
+  .rank-card:hover {
+    border-color:rgba(192,57,43,.15);
+    transform:translateX(3px);
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+  }
+  .rank-card .rank-top {
+    display:flex; align-items:center; gap:0.6rem; margin-bottom:0.2rem;
+  }
+  .rank-card .rank-num {
+    width:24px; height:24px; border-radius:6px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:0.75rem; font-weight:800; color:#fff; flex-shrink:0;
+  }
+  .rank-num.n1 { background:#c0392b; }
+  .rank-num.n2 { background:#e67e22; }
+  .rank-num.n3 { background:#f39c12; }
+  .rank-num.nn { background:#ddd; color:#999; }
 
-  .news-item {
-    background:#fff; border-radius:12px;
-    padding:0.9rem 1rem;
+  .rank-card .rank-title {
+    font-size:clamp(0.88rem,1.35vw,1rem);
+    font-weight:600; line-height:1.4; color:#2c2416; flex:1;
+  }
+  .rank-card .rank-hot { font-size:0.65rem; color:#bbb; white-space:nowrap; }
+  .rank-card .rank-desc {
+    font-size:clamp(0.75rem,1.1vw,0.83rem);
+    color:#999; line-height:1.6; margin-top:0.3rem;
+    padding-left:2.8rem;
+  }
+  .rank-card .rank-meta {
+    display:flex; align-items:center; gap:0.5rem; margin-top:0.25rem;
+    padding-left:2.8rem; font-size:0.65rem; color:#ccc;
+  }
+
+  /* ===== 热点指南 ===== */
+  .tip-card {
+    background:#fff; border-radius:12px; padding:0.9rem 1rem;
     margin-bottom:0.6rem;
     border:1px solid rgba(0,0,0,.04);
-    transition:all .15s;
-    cursor:pointer;
+    transition:all .15s; cursor:pointer;
   }
-  .news-item:hover {
-    transform:translateX(3px);
-    border-color:rgba(192,57,43,.15);
-    box-shadow:0 2px 8px rgba(0,0,0,.04);
+  .tip-card:hover {
+    border-color:rgba(192,57,43,.12); transform:translateX(2px);
   }
-  .news-item:active { transform:translateX(0); }
+  .tip-card .tip-title {
+    font-size:clamp(0.85rem,1.3vw,0.95rem);
+    font-weight:600; line-height:1.4; color:#2c2416;
+  }
+  .tip-card .tip-body {
+    font-size:clamp(0.75rem,1.1vw,0.83rem);
+    color:#888; line-height:1.7; margin-top:0.2rem;
+  }
+  .tip-card .tip-tag {
+    display:inline-block; font-size:0.6rem; padding:0.1rem 0.5rem;
+    border-radius:4px; font-weight:600;
+    margin-right:0.3rem;
+  }
+  .tip-tag-hot   { background:rgba(192,57,43,.08); color:#c0392b; }
+  .tip-tag-food  { background:rgba(230,126,34,.08); color:#e67e22; }
+  .tip-tag-local { background:rgba(44,36,22,.06); color:#777; }
+  .tip-tag-gen   { background:rgba(52,152,219,.08); color:#2980b9; }
 
-  .news-item .title {
-    font-size:clamp(0.9rem,1.4vw,1.05rem);
-    font-weight:600; line-height:1.5; color:#2c2416;
+  /* ===== BGM 卡片 ===== */
+  .bgm-card {
+    display:flex; align-items:center; gap:0.8rem;
+    background:#fff; border-radius:12px; padding:0.7rem 1rem;
+    margin-bottom:0.5rem;
+    border:1px solid rgba(0,0,0,.04);
+    transition:all .15s; cursor:pointer;
   }
-  .news-item .summary {
-    font-size:clamp(0.78rem,1.2vw,0.88rem);
-    color:#888; line-height:1.7;
-    margin-top:0.3rem;
+  .bgm-card:hover { border-color:rgba(192,57,43,.12); }
+  .bgm-card .bgm-num { font-size:0.7rem; font-weight:700; color:#bbb; min-width:1.5rem; }
+  .bgm-card .bgm-info { flex:1; }
+  .bgm-card .bgm-name { font-size:0.88rem; font-weight:600; color:#2c2416; }
+  .bgm-card .bgm-artist { font-size:0.72rem; color:#bbb; }
+  .bgm-card .bgm-tag { font-size:0.6rem; padding:0.1rem 0.5rem; border-radius:4px; background:rgba(184,134,11,.08); color:#b8860b; }
+
+  /* ===== 板块标题 ===== */
+  .sec {
+    margin-top:1.4rem;
   }
-  .news-item .meta {
+  .sec:first-child { margin-top:0.5rem; }
+  .sec-head {
     display:flex; align-items:center; gap:0.4rem;
-    margin-top:0.35rem; flex-wrap:wrap;
+    font-size:clamp(0.82rem,1.25vw,0.92rem);
+    font-weight:700; color:#c0392b;
+    padding-bottom:0.3rem;
+    margin-bottom:0.6rem;
+    border-bottom:1.5px solid rgba(192,57,43,.1);
   }
-  .news-item .meta .src {
-    font-size:0.68rem; color:#bbb;
-  }
-  .news-item .meta .link-icon {
-    font-size:0.6rem; color:#c0392b; opacity:0.4;
-  }
+  .sec-head .emoji { font-size:0.85rem; }
 
-  .tag { display:inline-block; font-size:0.62rem; padding:0.1rem 0.5rem; border-radius:4px; font-weight:600; }
-  .tag-hot     { background:rgba(192,57,43,.08); color:#c0392b; }
-  .tag-ai      { background:rgba(184,134,11,.08); color:#b8860b; }
-  .tag-local   { background:rgba(44,36,22,.06); color:#777; }
-  .tag-market  { background:rgba(39,174,96,.08); color:#27ae60; }
-  .tag-product { background:rgba(52,152,219,.08); color:#2980b9; }
+  /* ===== 动态卡片 ===== */
+  .news-card {
+    background:#fff; border-radius:10px; padding:0.8rem 1rem;
+    margin-bottom:0.45rem;
+    border:1px solid rgba(0,0,0,.04);
+    transition:all .12s; cursor:pointer;
+  }
+  .news-card:hover { border-color:rgba(192,57,43,.1); transform:translateX(2px); }
+  .news-card .nc-title { font-size:0.9rem; font-weight:600; line-height:1.4; color:#2c2416; }
+  .news-card .nc-summary { font-size:0.78rem; color:#999; line-height:1.6; margin-top:0.2rem; }
 
+  /* ===== 归档 ===== */
   .archive-box {
     margin-top:1.5rem;
     background:rgba(255,255,255,.3);
-    border-radius:12px; padding:1rem 1rem;
+    border-radius:12px; padding:1rem;
     border:1px solid rgba(0,0,0,.04);
   }
-  .archive-box h3 {
-    font-size:0.8rem; font-weight:700; color:#999; margin-bottom:0.4rem;
-  }
+  .archive-box h3 { font-size:0.78rem; font-weight:700; color:#999; margin-bottom:0.4rem; }
   .archive-box .day {
     display:flex; justify-content:space-between; align-items:center;
-    padding:0.35rem 0;
-    border-bottom:1px solid rgba(0,0,0,.03);
-    font-size:0.82rem; cursor:pointer; transition:color .1s;
+    padding:0.3rem 0; border-bottom:1px solid rgba(0,0,0,.03);
+    font-size:0.8rem; cursor:pointer;
   }
   .archive-box .day:last-child { border-bottom:none; }
   .archive-box .day:hover { color:#c0392b; }
-  .archive-box .day .d {}
-  .archive-box .day .s { font-size:0.68rem; color:#ccc; }
+  .archive-box .day .week { font-size:0.65rem; color:#ccc; }
 
-  .footer {
-    text-align:center; padding:2rem 1rem;
-    font-size:0.7rem; color:#ccc;
-  }
+  .footer { text-align:center; padding:2rem 1rem; font-size:0.68rem; color:#ccc; }
 
-  .skeleton { animation: sk 1.2s infinite; background:#e8e2da; border-radius:6px; height:1rem; margin-bottom:0.8rem; }
+  .sk { animation:sk 1.2s infinite; background:#e8e2da; border-radius:6px; height:1rem; margin-bottom:0.8rem; }
   @keyframes sk { 0%{opacity:.3} 50%{opacity:.6} 100%{opacity:.3} }
 
   @media(max-width:480px) {
-    .header { padding:2rem 1rem 1.4rem; }
-    .news-item { padding:0.7rem 0.8rem; }
-    .news-item .title { font-size:0.9rem; }
+    .header { padding:1.8rem 1rem 1.3rem; }
+    .rank-card { padding:0.7rem 0.8rem; }
+    .rank-card .rank-desc { padding-left:2.2rem; }
+    .rank-card .rank-meta { padding-left:2.2rem; }
   }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <h1>📰 每日简讯 · 雷姆</h1>
-  <p>每天早上 9:00 更新 · 陪主人开启新的一天</p>
+  <h1>📰 每日传媒简讯 · 雷姆</h1>
+  <div class="subtitle">编导 · 运营 · 内容创作者的一天从这里开始</div>
 </div>
 
 <div class="date-nav">
-  <div class="left">
+  <div>
     <div class="current-date" id="currentDate">2026年5月24日 · 星期日</div>
     <div class="sub" id="weekTag">第21周</div>
   </div>
   <div class="arrows">
-    <button id="prevBtn" onclick="prev()">‹</button>
-    <button id="nextBtn" onclick="next()">›</button>
+    <button id="prevBtn">‹</button>
+    <button id="nextBtn">›</button>
   </div>
 </div>
 
 <div class="container">
   <div id="briefingContainer">
-    <div class="skeleton" style="width:35%"></div>
-    <div class="skeleton"></div>
-    <div class="skeleton" style="width:60%"></div>
-    <div class="skeleton"></div>
+    <div class="sk" style="width:30%"></div>
+    <div class="sk"></div>
+    <div class="sk" style="width:55%"></div>
+    <div class="sk"></div>
   </div>
 
   <div class="archive-box">
@@ -167,151 +221,191 @@
 <div class="footer">🩵 雷姆 · 主人今天也要加油呀</div>
 
 <script>
-// ========== 简讯数据（每天更新从这里改） ==========
+// ================================================================
+// 数据区 · 每天早上由雷姆更新
+// ================================================================
 const briefings = {
   "2026-05-24": {
     date: "2026年5月24日 · 星期日",
     week: "第21周",
-    sections: [
-      {
-        title: "🔥 今日热点",
-        emoji: "🔥",
-        items: [
-          {
-            title: "OpenAI发布GPT-5.1，推理能力大幅提升",
-            tag: "hot", source: "TechCrunch",
-            url: "https://techcrunch.com/2026/05/23/openai-gpt-5-1",
-            summary: "新模型在数学推理和代码生成方面提升显著，尤其在多步推理任务上准确率提高约20%。API价格维持不变，开发者可以更低的成本获得更强的推理能力。同时引入了新的上下文窗口优化机制。"
-          },
-          {
-            title: "抖音本地生活GMV同比增长67%",
-            tag: "market", source: "36氪",
-            url: "https://36kr.com/p/123456",
-            summary: "餐饮类目贡献了最大增量，其中昆明地区增速（82%）高于全国平均水平。火锅、米线、烧烤三大品类增长最快。平台正在测试直播团购新入口，对餐饮老板来说是新的流量机会。"
-          },
-          {
-            title: "昆明地铁5号线客流创历史新高",
-            tag: "local", source: "昆明发布",
-            url: "https://www.kunming.cn/news/2026-05-23/12345",
-            summary: "周末单日客流突破45万人次，斗南站增幅最大。世博园站、滇池国际会展中心站客流也明显上升。春城夏季旅游旺季提前到来，建议餐饮店关注地铁沿线的客流变化。"
-          }
-        ]
-      },
-      {
-        title: "🤖 AI 前沿",
-        emoji: "🤖",
-        items: [
-          {
-            title: "字节跳动发布视频生成模型VideoGen2",
-            tag: "ai", source: "量子位",
-            url: "https://www.qbitai.com/2026/05/54321",
-            summary: "VideoGen2 支持最长10分钟的视频生成，画面一致性和动作连贯性相比上一代大幅提升。同时开放了API接口，创作者可以用它来生成视频素材。对短视频创作者来说可能是一个效率工具。"
-          },
-          {
-            title: "阿里通义千问上线Mac客户端",
-            tag: "ai", source: "IT之家",
-            url: "https://www.ithome.com/0/789/456.htm",
-            summary: "支持离线使用、文件上传分析、语音输入等功能。Mac用户可直接在桌面端调用大模型能力，支持代码解释、长文档总结等场景。Windows版本预计下月上线。"
-          }
-        ]
-      },
-      {
-        title: "📈 营销参考",
-        emoji: "📈",
-        items: [
-          {
-            title: "母亲节餐饮数据：到店率同比增32%",
-            tag: "market", source: "美团报告",
-            url: "https://about.meituan.com/research/2026/mothers-day",
-            summary: "母亲节当天餐饮到店消费同比增长32%，其中鲜花饼、蛋糕类甜品搜索量增长200%。建议餐饮老板提前2周布局节日内容营销，节日当天发布视频的效果最好。昆明地区鲜花饼礼盒套餐最受欢迎。"
-          },
-          {
-            title: "小红书本地生活上线团购功能",
-            tag: "product", source: "亿邦动力",
-            url: "https://www.ebrun.com/202605/123456.shtml",
-            summary: "小红书正式开放本地生活团购功能，餐饮类目率先上线。用户可以在笔记中直接下单购买团购套餐，对餐饮老板来说是新的免费流量入口。目前处于内测阶段，建议尽早入驻抢占位置。"
-          }
-        ]
-      },
-      {
-        title: "📍 昆明 · 本地",
-        emoji: "📍",
-        items: [
-          {
-            title: "呈贡今日天气：多云 18~26℃",
-            tag: "local", source: "中国天气网",
-            url: "https://www.weather.com.cn/weather/530121.shtml",
-            summary: ""
-          },
-          {
-            title: "昆明米线节本周六在官渡古镇举办",
-            tag: "local", source: "春城晚报",
-            url: "https://www.ccwb.cn/2026/0523/123456",
-            summary: "60+家本地米线店参加，现场有评选活动，各店招牌米线集中展示。适合餐饮老板去现场考察学习，也适合拍视频素材。活动免费入场。"
-          },
-          {
-            title: "斗南花市夏季鲜花价格同比下降15%",
-            tag: "local", source: "都市时报",
-            url: "https://www.dssb.cn/2026/05/23/789012",
-            summary: "玫瑰、百合等主流鲜花价格较去年同期下降15%左右，花量充足。对餐饮店来说，用鲜花做店面装饰或拍摄道具的成本降低了，适合拍一些氛围感内容。"
-          }
-        ]
-      }
+    douyin: [
+      { rank: 1, title: "2026盛夏音乐节官宣阵容", hot: "982万", tag: "娱乐" },
+      { rank: 2, title: "昆明一餐厅推出'盲盒米线'日销300碗", hot: "765万", tag: "本地" },
+      { rank: 3, title: "挑战连续30天拍同款运镜", hot: "641万", tag: "创作" },
+      { rank: 4, title: "城市夜晚烟火气合集", hot: "523万", tag: "拍摄" },
+      { rank: 5, title: "餐饮老板真实一天vlog火了", hot: "487万", tag: "餐饮" },
+      { rank: 6, title: "这届毕业生最扎心的一句话", hot: "432万", tag: "情感" },
+      { rank: 7, title: "昆明斗南花市凌晨实拍", hot: "398万", tag: "本地" },
+      { rank: 8, title: "妈妈做的菜vs外卖的区别", hot: "354万", tag: "情感" },
+      { rank: 9, title: "探店博主翻车名场面", hot: "312万", tag: "搞笑" },
+      { rank: 10, title: "学会这个转场新手变大神", hot: "287万", tag: "教程" }
+    ],
+    xiaohongshu: [
+      { rank: 1, title: "昆明小众拍照地合集·绝对出片", hot: "23.4万赞" },
+      { rank: 2, title: "做自媒体3个月的真实收入", hot: "18.7万赞" },
+      { rank: 3, title: "云南野生菌季节·避坑指南", hot: "15.2万赞" },
+      { rank: 4, title: "我的房间有一整面花墙", hot: "12.8万赞" },
+      { rank: 5, title: "短视频文案怎么写才有共鸣", hot: "11.3万赞" },
+      { rank: 6, title: "呈贡大学城美食地图·不踩雷", hot: "9.8万赞" },
+      { rank: 7, title: "零基础学剪辑·三分钟上手", hot: "8.6万赞" },
+      { rank: 8, title: "周末昆明周边游·1小时到达", hot: "7.5万赞" },
+      { rank: 9, title: "餐饮店主理人口播话术模板", hot: "6.4万赞" },
+      { rank: 10, title: "打工人的早餐30天不重样", hot: "5.3万赞" }
+    ],
+    weibo: [
+      { title: "2026高考倒计时14天", hot: "热搜第4", desc: "情感类话题，适合做温情向内容" },
+      { title: "云南野生菌大量上市价格腰斩", hot: "热搜第7", desc: "本地热点，餐饮/探店类可跟" },
+      { title: "年轻人开始流行周末'微度假'", hot: "热搜第12", desc: "生活方式类内容方向" }
+    ],
+    tips: [
+      { tag: "餐饮", title: "🍜 盲盒米线成爆款", body: "昆明餐厅推出盲盒米线走红抖音。蹭热点方向：①拍自家产品的'盲盒开箱' ②'如果你来昆明我会带你去吃'系列 ③挑战用盲盒方式推荐菜品" },
+      { tag: "本地", title: "📍 斗南花市凌晨实拍", body: "凌晨实拍类内容在抖音流量不错。可以跟：昆明本地生活vlog、花市探访。适合用氛围感剪辑+治愈系BGM" },
+      { tag: "通用", title: "🎬 连续30天同款运镜挑战", body: "近期抖音在推挑战类内容。建议：用同一种运镜方式拍不同内容，可以出连续剧式内容，涨粉效果很好" }
+    ],
+    bgm: [
+      { name: "夏夜的风 (DJ版)", artist: "李沐阳", tag: "氛围感" },
+      { name: "妈妈做的菜", artist: "王七七", tag: "情感" },
+      { name: "City Night Drive", artist: "Lofi Boy", tag: "Vlog" },
+      { name: "云南好时光", artist: "本地音乐人", tag: "本地" },
+      { name: "夏日汽水声 (ASMR)", artist: "音效合集", tag: "治愈" }
+    ],
+    news: [
+      { title: "抖音测试'极速版'直播带货入口", desc: "抖音正在测试新的直播入口，流量分配机制可能有变化，建议持续关注" },
+      { title: "小红书本地生活团购开放个人店主入驻", desc: "之前只对企业开放，现在个人也可以入驻了，对餐饮老板是利好" }
+    ],
+    local: [
+      { title: "呈贡今日天气：多云转晴 19~27℃", desc: "" },
+      { title: "昆明米线节本周六官渡古镇开幕", desc: "60+米线店参加，适合去拍素材、认识同行" },
+      { title: "斗南花市夏季鲜花大量上市", desc: "玫瑰10元20枝，适合买来当拍摄道具" }
     ]
   }
 };
 
+// ================================================================
+// 渲染引擎
+// ================================================================
 const dates = Object.keys(briefings).sort().reverse();
 let cur = 0;
-const today = "2026-05-24";
+const today = dates[0];
 
-function tagClass(t) {
-  const map = { hot:'tag-hot', ai:'tag-ai', local:'tag-local', market:'tag-market', product:'tag-product' };
-  return map[t] || 'tag-hot';
+function numClass(n) {
+  if (n <= 3) return 'n' + n;
+  return 'nn';
 }
 
-function render(d) {
-  const b = briefings[d];
-  if (!b) return;
-  const con = document.getElementById('briefingContainer');
-  const arch = document.getElementById('archiveDays');
-  let html = `<div class="briefing active">`;
-  b.sections.forEach(s => {
-    html += `<div class="sec-title"><span class="emoji">${s.emoji}</span> ${s.title}</div>`;
-    s.items.forEach(item => {
-      html += `<div class="news-item" onclick="window.open('${item.url || '#'}','_blank')">
-        <div class="title"><span class="tag ${tagClass(item.tag)}">${item.tag === 'hot' ? '热点' : item.tag === 'ai' ? 'AI' : item.tag === 'local' ? '本地' : item.tag === 'market' ? '市场' : '产品'}</span> ${item.title}</div>
-        ${item.summary ? `<div class="summary">${item.summary}</div>` : ''}
-        <div class="meta">
-          <span class="src">${item.source || ''}</span>
-          ${item.url ? `<span class="link-icon">↗ 查看原文</span>` : ''}
-        </div>
-      </div>`;
-    });
-  });
-  html += `</div>`;
-  con.innerHTML = html;
+function render(dateStr) {
+  const d = briefings[dateStr];
+  if (!d) return;
 
-  let ahtml = '';
-  dates.forEach(dd => {
-    const act = dd === d;
-    const bb = briefings[dd];
-    ahtml += `<div class="day" onclick="go('${dd}')" style="cursor:pointer;">
-      <span class="d">${act ? '👉 ' : ''}${bb ? bb.date : dd}</span>
-      <span class="s">${bb ? bb.week : ''}</span>
+  let html = `<div class="briefing active">`;
+
+  // —— 抖音热榜 ——
+  html += `<div class="sec"><div class="sec-head"><span class="emoji">📱</span> 抖音热榜 Top 10</div>`;
+  d.douyin.forEach(item => {
+    html += `<div class="rank-card">
+      <div class="rank-top">
+        <div class="rank-num ${numClass(item.rank)}">${item.rank}</div>
+        <div class="rank-title">${item.title}</div>
+        <div class="rank-hot">🔥 ${item.hot}</div>
+      </div>
     </div>`;
   });
-  arch.innerHTML = ahtml;
+  html += `</div>`;
 
-  document.getElementById('currentDate').textContent = b.date;
-  document.getElementById('weekTag').textContent = b.week;
+  // —— 小红书热榜 ——
+  html += `<div class="sec"><div class="sec-head"><span class="emoji">📕</span> 小红书热榜 Top 10</div>`;
+  d.xiaohongshu.forEach(item => {
+    html += `<div class="rank-card">
+      <div class="rank-top">
+        <div class="rank-num ${numClass(item.rank)}">${item.rank}</div>
+        <div class="rank-title">${item.title}</div>
+        <div class="rank-hot">❤️ ${item.hot}</div>
+      </div>
+    </div>`;
+  });
+  html += `</div>`;
+
+  // —— 微博热搜精选 ——
+  html += `<div class="sec"><div class="sec-head"><span class="emoji">🔥</span> 微博热搜精选</div>`;
+  d.weibo.forEach(item => {
+    html += `<div class="rank-card">
+      <div class="rank-top">
+        <div class="rank-title">${item.title}</div>
+        <div class="rank-hot">${item.hot}</div>
+      </div>
+      <div class="rank-desc">${item.desc}</div>
+    </div>`;
+  });
+  html += `</div>`;
+
+  // —— 蹭热点指南 ——
+  html += `<div class="sec"><div class="sec-head"><span class="emoji">🎯</span> 蹭热点参考</div>`;
+  d.tips.forEach(item => {
+    html += `<div class="tip-card">
+      <div class="tip-title"><span class="tip-tag tip-tag-${item.tag === '餐饮' ? 'food' : item.tag === '本地' ? 'local' : 'gen'}">${item.tag}</span> ${item.title}</div>
+      <div class="tip-body">${item.body}</div>
+    </div>`;
+  });
+  html += `</div>`;
+
+  // —— 今日热门BGM ——
+  html += `<div class="sec"><div class="sec-head"><span class="emoji">🎵</span> 今日热门 BGM</div>`;
+  d.bgm.forEach((item, idx) => {
+    html += `<div class="bgm-card">
+      <div class="bgm-num">${String(idx+1).padStart(2,'0')}</div>
+      <div class="bgm-info">
+        <div class="bgm-name">${item.name}</div>
+        <div class="bgm-artist">${item.artist}</div>
+      </div>
+      <div class="bgm-tag">${item.tag}</div>
+    </div>`;
+  });
+  html += `</div>`;
+
+  // —— 行业动态 ——
+  html += `<div class="sec"><div class="sec-head"><span class="emoji">📰</span> 行业动态</div>`;
+  d.news.forEach(item => {
+    html += `<div class="news-card">
+      <div class="nc-title">${item.title}</div>
+      ${item.desc ? `<div class="nc-summary">${item.desc}</div>` : ''}
+    </div>`;
+  });
+  html += `</div>`;
+
+  // —— 本地 ——
+  html += `<div class="sec"><div class="sec-head"><span class="emoji">📍</span> 昆明 · 本地</div>`;
+  d.local.forEach(item => {
+    html += `<div class="news-card">
+      <div class="nc-title">${item.title}</div>
+      ${item.desc ? `<div class="nc-summary">${item.desc}</div>` : ''}
+    </div>`;
+  });
+  html += `</div>`;
+
+  html += `</div>`;
+  document.getElementById('briefingContainer').innerHTML = html;
+
+  // 归档
+  let arch = '';
+  dates.forEach(dd => {
+    const b = briefings[dd];
+    const act = dd === dateStr;
+    arch += `<div class="day" onclick="go('${dd}')">
+      <span>${act ? '👉 ' : ''}${b ? b.date : dd}</span>
+      <span class="week">${b ? b.week : ''}</span>
+    </div>`;
+  });
+  document.getElementById('archiveDays').innerHTML = arch;
+
+  document.getElementById('currentDate').textContent = d.date;
+  document.getElementById('weekTag').textContent = d.week;
   document.getElementById('prevBtn').disabled = cur >= dates.length - 1;
   document.getElementById('nextBtn').disabled = cur <= 0;
 }
 
 function go(d) { cur = dates.indexOf(d); if (cur>=0) render(d); }
-function prev() { if (cur < dates.length-1) { cur++; render(dates[cur]); } }
-function next() { if (cur > 0) { cur--; render(dates[cur]); } }
+document.getElementById('prevBtn').onclick = () => { if (cur < dates.length-1) { cur++; render(dates[cur]); } };
+document.getElementById('nextBtn').onclick = () => { if (cur > 0) { cur--; render(dates[cur]); } };
 
 render(today);
 </script>
